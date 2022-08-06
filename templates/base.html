@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teal - Umiirosoft</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <script src="{{ url_for('static', filename='service-worker.js') }}"></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    
+    {% block body %}{% endblock %}
+
+    <script>
+      if('serviceWorker' in navigator){
+        navigator.serviceWorker.register("{{ url_for('static', filename='service-worker.js') }}").then(function(){
+          console.log("Service Worker is registered!!");
+        });
+      }
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+</body>
+</html>
