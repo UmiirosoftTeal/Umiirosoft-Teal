@@ -1,6 +1,28 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>HelloWorld!</h1>
+<div class="tweet-item">
+    <!-- Simple Textfield -->
+    <!-- Floating Multiline Textfield -->
+    <form action="#">
+        <div class="mdl-textfield mdl-js-textfield">
+            <textarea class="mdl-textfield__input" type="text" rows="5" id="sample5"></textarea>
+            <label class="mdl-textfield__label" for="sample5">いま何してる？</label>
+        </div>
+    </form>
+
+</div>
+<div class="tweet-item">
+    <table>
+        <td>
+            <img class="user-icon" src="https://pkg.go.dev/static/shared/gopher/package-search-700x300.jpeg">
+        </td>
+        <td>
+            <p class="user-name">ユーザー名</p>
+            <p>テキストテキストテキストテキストテキスト</p>
+        </td>
+    </table>
+</div>
+
 
 {% endblock %}
