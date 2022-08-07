@@ -1,28 +1,74 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div class="tweet-item">
-    <!-- Simple Textfield -->
-    <!-- Floating Multiline Textfield -->
-    <form action="#">
-        <div class="mdl-textfield mdl-js-textfield">
-            <textarea class="mdl-textfield__input" type="text" rows="5" id="sample5"></textarea>
-            <label class="mdl-textfield__label" for="sample5">いま何してる？</label>
-        </div>
-    </form>
+<div class="page-content">
+    <div class="tweet-item postTools shadow">
+        <form action="/home" method="POST">
+            <p id="textCount"></p>
+            <div class="mdl-textfield mdl-js-textfield">
+                <textarea name="postTweet" class="mdl-textfield__input" type="text" rows="5" id="sample5"
+                    onkeyup="ShowLength(value)"></textarea>
+                <label class="mdl-textfield__label" for="sample5">いま何してる？</label>
+            </div>
+            <div class="btn-cover">
+                <button id="tweetPush" type="submit"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    投稿
+                </button>
+            </div>
+        </form>
 
+    </div>
+
+    {% for tweet in tweets %}
+    <div class="tweet-item shadow">
+        <table>
+            <td>
+                <img class="user-icon" src="https://pkg.go.dev/static/shared/gopher/package-search-700x300.jpeg">
+            </td>
+            <td>
+                <p class="user-name">{{ tweet.postUser }}</p>
+                <p>{{ tweet.postTweet }}</p>
+            </td>
+        </table>
+    </div>
+    {% endfor %}
 </div>
-<div class="tweet-item">
-    <table>
-        <td>
-            <img class="user-icon" src="https://pkg.go.dev/static/shared/gopher/package-search-700x300.jpeg">
-        </td>
-        <td>
-            <p class="user-name">ユーザー名</p>
-            <p>テキストテキストテキストテキストテキスト</p>
-        </td>
-    </table>
-</div>
 
+<script>
+    const tweetPush = document.getElementById('tweetPush');
+    const textCount = document.getElementById('textCount');
 
+    tweetPush.style.display = "none";
+    textCount.style.display = "none";
+    function ShowLength(str) {
+        textCount.innerHTML = str.length + "文字";
+        if (str.length <= 0) {
+            tweetPush.style.display = "none";
+            textCount.style.display = "none";
+            tweetPush.disabled = true;
+        }
+        if (str.length >= 1) {
+            tweetPush.style.display = "block";
+            textCount.style.display = "block";
+            tweetPush.disabled = false;
+        }
+        if (str.length > 120) {
+            tweetPush.disabled = true;
+            const over = 120 - str.length;
+            textCount.innerHTML = "文字数制限 " + over;
+        }
+    }
+
+    var $grid = $('.page-content'),
+        emptyCells = [],
+        i;
+
+    // 子パネル (li.cell) の数だけ空の子パネル (li.cell.is-empty) を追加する。
+    for (i = 0; i < $grid.find('.tweet-item').length; i++) {
+        emptyCells.push($('<div>', { class: 'tweet-item is-empty' }));
+    }
+
+    $grid.append(emptyCells);
+</script>
 {% endblock %}

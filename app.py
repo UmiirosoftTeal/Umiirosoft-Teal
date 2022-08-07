@@ -2,16 +2,130 @@
 # Copyright 2022 Umiirosoft.
 
 from flask import Flask, render_template, request, redirect
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+
+# データベース作成 / 設定
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///postData.db'
+app.config['SECRET_KEY'] = '5730292743938474948439320285857603'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+# Tweetデータ
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    postUser = db.Column(db.String(20), nullable=False)
+    postTweet = db.Column(db.String(280), nullable=True)
+    videoUrl = db.Column(db.Text)
+    imgUrl = db.Column(db.Text)
+
+# ログインデータ
+
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
+    userdetail = db.Column(db.Text)
+    useremail = db.Column(db.String(100), nullable=False, unique=True)
+    password = db.Column(db.String(25), nullable=False)
+
 
 @app.route('/')
 def redirect_func():
     return redirect('/home')
 
-@app.route('/home')
+
+@app.route('/home', methods=['GET', 'POST'])
+@login_required  # ログインチェック
 def home():
-    return render_template('index.html')
+    if request.method == 'GET':
+        tweets = Post.query.order_by(Post.id.desc()).all()
+        return render_template('index.html', tweets=tweets)
+
+    else:
+        postUser = current_user.username
+        postTweet = request.form.get('postTweet')
+        videoUrl = "test"  # request.files['videoUrl']
+        imgUrl = "test"  # request.files['imgUrl']
+
+        new_post = Post(postUser=postUser, postTweet=postTweet,
+                        videoUrl=videoUrl, imgUrl=imgUrl)
+
+        db.session.add(new_post)
+        db.session.commit()
+
+        return redirect('/home')
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
+    if request.method == 'POST':
+        useremail = request.form.get('useremail')
+        password = request.form.get('password')
+
+        # Userテーブルからusernameに一致するユーザを取得
+        user = User.query.filter_by(useremail=useremail).first()
+        if check_password_hash(user.password, password):
+            login_user(user)
+            return redirect('/home')
+
+        else:
+            return redirect('/signin')
+
+    else:
+        return render_template('signin.html')
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        useremail = request.form.get('useremail')
+        password = request.form.get('password')
+        userdetail = " "
+
+        new_user = User(username=username, useremail=useremail, userdetail=userdetail,
+                        password=generate_password_hash(password, method='sha256'))  # パスワードをハッシュ値に変換
+        db.session.add(new_user)
+        db.session.commit()
+
+        return redirect('/signin')
+
+    else:
+        return render_template('signup.html')
+
+
+@app.route('/logout')
+@login_required  # ログインチェック
+def logout():
+    logout_user()
+    return redirect('/about')
+
+# ログイン前はリダイレクト
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect('/about')
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=80)

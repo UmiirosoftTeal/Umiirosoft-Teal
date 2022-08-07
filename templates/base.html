@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <script src="{{ url_for('static', filename='service-worker.js') }}"></script>
@@ -23,30 +24,38 @@
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <div class="mdl-layout-spacer"></div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+                <div
+                    class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
                     <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
                         <i class="material-icons">search</i>
                     </label>
                     <div class="mdl-textfield__expandable-holder">
-                        <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                        <input class="mdl-textfield__input" placeholder="キーワード検索" type="text" name="sample"
+                            id="fixed-header-drawer-exp">
                     </div>
                 </div>
             </div>
         </header>
         <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title center"><img width="120px" src="{{ url_for('static', filename='images/logo.svg') }}"></span>
+            <span class="mdl-layout-title center"><img width="120px"
+                    src="{{ url_for('static', filename='images/logo.svg') }}"></span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">見つける</a>
-                <a class="mdl-navigation__link" href="">トレンド</a>
-                <a class="mdl-navigation__link" href="">通知</a>
-                <a class="mdl-navigation__link" href="">プロフィール</a>
-                <a class="mdl-navigation__link" href="">その他</a>
+                {% if current_user.is_anonymous %}
+                <a class="mdl-navigation__link" href="/about">Welcome!</a>
+                {% else %}
+                <a class="mdl-navigation__link" href="/home">見つける</a>
+                <a class="mdl-navigation__link" href="/home/trend">トレンド</a>
+                <a class="mdl-navigation__link" href="/home/notifications">通知</a>
+                <a class="mdl-navigation__link" href="home/username">プロフィール</a>
+                <a class="mdl-navigation__link" href="/home/other">その他</a>
+                <a class="mdl-navigation__link" href="/logout">ログアウト</a>
+                {% endif %}
             </nav>
         </div>
         <main class="mdl-layout__content">
-            <div class="page-content">
-                {% block body %}{% endblock %}
-            </div>
+
+            {% block body %}{% endblock %}
+
         </main>
     </div>
     <script>
