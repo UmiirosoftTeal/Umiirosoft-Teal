@@ -57,11 +57,12 @@ body {
 
 .btn-cover {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
 }
 
-#tweetPush {
-    background: var(--tealThemaColor);
+#tweetPush,
+#tweetPush-mb {
+    background: var(--tealColor2);
 }
 
 @media screen and (max-width: 1500px) {
@@ -78,9 +79,23 @@ body {
     }
 }
 
+@media screen and (min-width: 1024px) {
+    .fixed_btn {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 1024px) {
+    .tweet-item {
+        margin: 5px;
+    }
+
     .postTools {
         display: none;
+    }
+
+    .fixed_btn {
+        display: block;
     }
 }
 
@@ -104,8 +119,7 @@ body {
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
-    border: #008080 1px solid;
-    margin-left: 10px;
+    margin-left: 5px;
     margin-right: 15px;
 }
 
@@ -208,4 +222,41 @@ span {
     padding-bottom: 0;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.fixed_btn {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 15px 15px;
+}
+
+#show-dialog {
+    background: var(--tealColor2);
+}
+
+#preview img {
+    width: 50%;
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 10%;
+}
+
+#preview-mb img {
+    width: 50%;
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 10%;
+}
+
+.tweet-item-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.mdl-dialog {
+    width: 90%;
 }

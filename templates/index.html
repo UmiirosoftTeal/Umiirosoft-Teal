@@ -3,44 +3,90 @@
 {% block body %}
 <div class="page-content">
     <div class="tweet-item postTools shadow">
-        <form action="/home" method="POST">
+        <form action="/home" method="POST" enctype="multipart/form-data">
             <p id="textCount"></p>
             <div class="mdl-textfield mdl-js-textfield">
-                <textarea name="postTweet" class="mdl-textfield__input" type="text" rows="5" id="sample5"
+                <textarea name="postTweet" class="mdl-textfield__input" rows="3" type="text"
                     onkeyup="ShowLength(value)"></textarea>
                 <label class="mdl-textfield__label" for="sample5">いま何してる？</label>
             </div>
             <div class="btn-cover">
+                <label for="file_upload">
+                    <span class="material-symbols-rounded">imagesmode</span>
+                    <input type="file" id="file_upload" accept="image/jpeg" style="display:none;"
+                        onchange="imgPreView(event)" name="imgUrl">
+                </label>
+
                 <button id="tweetPush" type="submit"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     投稿
                 </button>
             </div>
+            <div id="preview"></div>
         </form>
-
     </div>
 
     {% for tweet in tweets %}
     <div class="tweet-item shadow">
         <table>
             <td>
-                <img class="user-icon" src="https://pkg.go.dev/static/shared/gopher/package-search-700x300.jpeg">
+                <img class="user-icon" src="https://object.gamma410.win/teal/users/{{tweet.postUser}}.jpg">
             </td>
             <td>
                 <p class="user-name">{{ tweet.postUser }}</p>
-                <p>{{ tweet.postTweet }}</p>
+                <p>{{ tweet.postTweet | replace('\n', '<br>') | safe}}</p>
+                {% if tweet.imgUrl != None %}
+                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{tweet.imgUrl}}">
+                {% endif %}
             </td>
         </table>
     </div>
     {% endfor %}
+
+    <button id="show-dialog" type="button"
+        class="fixed_btn mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+        <i class="material-icons">add</i>
+    </button>
+
+    <dialog class="mdl-dialog">
+        <form action="/home" method="POST" enctype="multipart/form-data">
+            <p id="textCount-mb"></p>
+            <div class="mdl-textfield mdl-js-textfield">
+                <textarea name="postTweet" class="mdl-textfield__input" type="text" rows="5"
+                    onkeyup="ShowLengthMB(value)"></textarea>
+                <label class="mdl-textfield__label" for="sample5">いま何してる？</label>
+            </div>
+            <div class="btn-cover">
+                <label for="file_uploads">
+                    <span class="material-symbols-rounded">imagesmode</span>
+                    <input type="file" id="file_uploads" accept="image/jpeg" style="display:none;"
+                        onchange="imgPreViewMB(event)" name="imgUrl">
+                </label>
+
+                <button id="tweetPush-mb" type="submit"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    投稿
+                </button>
+            </div>
+            <div id="preview-mb"></div>
+        </form>
+    </dialog>
+
 </div>
 
 <script>
     const tweetPush = document.getElementById('tweetPush');
     const textCount = document.getElementById('textCount');
 
+    const tweetPushMB = document.getElementById('tweetPush-mb');
+    const textCountMB = document.getElementById('textCount-mb');
+
     tweetPush.style.display = "none";
     textCount.style.display = "none";
+
+    tweetPushMB.style.display = "none";
+    textCountMB.style.display = "none";
+
     function ShowLength(str) {
         textCount.innerHTML = str.length + "文字";
         if (str.length <= 0) {
@@ -60,6 +106,65 @@
         }
     }
 
+    function ShowLengthMB(str) {
+        textCountMB.innerHTML = str.length + "文字";
+        if (str.length <= 0) {
+            tweetPushMB.style.display = "none";
+            textCountMB.style.display = "none";
+            tweetPushMB.disabled = true;
+        }
+        if (str.length >= 1) {
+            tweetPushMB.style.display = "block";
+            textCountMB.style.display = "block";
+            tweetPushMB.disabled = false;
+        }
+        if (str.length > 120) {
+            tweetPushMB.disabled = true;
+            const over = 120 - str.length;
+            textCountMB.innerHTML = "文字数制限 " + over;
+        }
+    }
+
+    function imgPreView(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        var preview = document.getElementById("preview");
+        var previewImage = document.getElementById("previewImage");
+
+        if (previewImage != null)
+            preview.removeChild(previewImage);
+
+        reader.onload = function (event) {
+            var img = document.createElement("img");
+            img.setAttribute("src", reader.result);
+            img.setAttribute("id", "previewImage");
+            preview.appendChild(img);
+
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    function imgPreViewMB(event) {
+        var files = event.target.files[0];
+        var readers = new FileReader();
+        var previewMB = document.getElementById("preview-mb");
+        var previewImages = document.getElementById("previewImages");
+
+        if (previewImages != null)
+            previewMB.removeChild(previewImages);
+
+        readers.onload = function (event) {
+            var imgs = document.createElement("img");
+            imgs.setAttribute("src", readers.result);
+            imgs.setAttribute("id", "previewImages");
+            previewMB.appendChild(imgs);
+
+        };
+        readers.readAsDataURL(files);
+    }
+
+
     var $grid = $('.page-content'),
         emptyCells = [],
         i;
@@ -70,5 +175,20 @@
     }
 
     $grid.append(emptyCells);
+
+    var dialog = document.querySelector('dialog');
+    var showDialogButton = document.querySelector('#show-dialog');
+
+    if (!dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+    }
+    showDialogButton.addEventListener('click', function () {
+        dialog.showModal();
+    });
+    dialog.querySelector('.close').addEventListener('click', function () {
+        dialog.close();
+    });
+
+
 </script>
 {% endblock %}

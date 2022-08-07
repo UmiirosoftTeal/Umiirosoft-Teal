@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+import boto3
 
 app = Flask(__name__)
 
@@ -43,6 +44,17 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(25), nullable=False)
 
 
+# S3 の設定
+s3 = boto3.client('s3',
+                  endpoint_url='https://object.gamma410.win',
+                  aws_access_key_id='minioadmin',
+                  aws_secret_access_key='minioadmin'
+                  )
+
+# バケット名を代入しておく
+Bucket = 'teal'
+
+
 @app.route('/')
 def redirect_func():
     return redirect('/home')
@@ -59,13 +71,33 @@ def home():
         postUser = current_user.username
         postTweet = request.form.get('postTweet')
         videoUrl = "test"  # request.files['videoUrl']
-        imgUrl = "test"  # request.files['imgUrl']
+        picture = request.files['imgUrl']
 
-        new_post = Post(postUser=postUser, postTweet=postTweet,
-                        videoUrl=videoUrl, imgUrl=imgUrl)
+        if picture:
 
-        db.session.add(new_post)
-        db.session.commit()
+            postTweetCode = postTweet.encode('utf-8')
+            imgUrlHex = postTweetCode.hex()
+            imgUrl = imgUrlHex + ".jpg"  # ファイル名
+
+            iconMetaData = "image/jpeg"  # フォーマット指定
+
+            # S3 アップロード
+            s3.upload_fileobj(
+                picture, Bucket, f'picture/{imgUrl}', ExtraArgs={'ContentType': iconMetaData})
+
+            new_post = Post(postUser=postUser, postTweet=postTweet,
+                            videoUrl=videoUrl, imgUrl=imgUrl)
+
+            db.session.add(new_post)
+            db.session.commit()
+
+        else:
+            imgUrl = None
+            new_post = Post(postUser=postUser, postTweet=postTweet,
+                            videoUrl=videoUrl, imgUrl=imgUrl)
+
+            db.session.add(new_post)
+            db.session.commit()
 
         return redirect('/home')
 
@@ -97,10 +129,18 @@ def signin():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        usericon = request.files['usericon']
         username = request.form.get('username')
         useremail = request.form.get('useremail')
         password = request.form.get('password')
         userdetail = " "
+
+        iconUrl = username + ".jpg"  # ファイル名
+        iconMetaData = "image/jpeg"  # フォーマット指定
+
+        # S3 アップロード
+        s3.upload_fileobj(
+            usericon, Bucket, f'users/{iconUrl}', ExtraArgs={'ContentType': iconMetaData})
 
         new_user = User(username=username, useremail=useremail, userdetail=userdetail,
                         password=generate_password_hash(password, method='sha256'))  # パスワードをハッシュ値に変換
