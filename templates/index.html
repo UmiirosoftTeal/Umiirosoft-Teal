@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div id="loading"></div>
 <div class="page-content">
     <div class="tweet-item postTools shadow">
-        <form action="/home" method="POST" enctype="multipart/form-data">
+        <form id="Box" action="/home" method="POST" enctype="multipart/form-data">
             <p id="textCount"></p>
             <div class="mdl-textfield mdl-js-textfield">
                 <textarea name="postTweet" class="mdl-textfield__input" rows="3" type="text"
@@ -17,7 +18,7 @@
                         onchange="imgPreView(event)" name="imgUrl">
                 </label>
 
-                <button id="tweetPush" type="submit"
+                <button onclick="onButton()" id="tweetPush" type="submit"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     投稿
                 </button>
@@ -49,7 +50,7 @@
     </button>
 
     <dialog class="mdl-dialog">
-        <form action="/home" method="POST" enctype="multipart/form-data">
+        <form id="mbBox" action="/home" method="POST" enctype="multipart/form-data">
             <p id="textCount-mb"></p>
             <div class="mdl-textfield mdl-js-textfield">
                 <textarea name="postTweet" class="mdl-textfield__input" type="text" rows="5"
@@ -63,7 +64,7 @@
                         onchange="imgPreViewMB(event)" name="imgUrl">
                 </label>
 
-                <button id="tweetPush-mb" type="submit"
+                <button onclick="onButtonMB()" id="tweetPush-mb" type="submit"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     投稿
                 </button>
@@ -81,6 +82,22 @@
     const tweetPushMB = document.getElementById('tweetPush-mb');
     const textCountMB = document.getElementById('textCount-mb');
 
+    const Box = document.getElementById('Box');
+    const mbBox = document.getElementById('mbBox');
+
+
+    function onButton(){
+        const spinner = document.getElementById('loading');
+        spinner.classList.add('loader');
+        tweetPush.disabled = true
+        Box.style.display = 'none';
+    }
+    function onButtonMB(){
+        const spinners = document.getElementById('loadings');
+        spinners.classList.add('loader');
+        tweetPushMB.disabled = true
+        mbBox.style.display = 'none';
+    }
     tweetPush.style.display = "none";
     textCount.style.display = "none";
 
@@ -188,7 +205,5 @@
     dialog.querySelector('.close').addEventListener('click', function () {
         dialog.close();
     });
-
-
 </script>
 {% endblock %}
