@@ -46,7 +46,7 @@
                 <a class="mdl-navigation__link" href="/about">Welcome!</a>
                 {% else %}
                 <a class="mdl-navigation__link" href="/home">見つける</a>
-                <a class="mdl-navigation__link" href="home/username">プロフィール</a>
+                <a class="mdl-navigation__link" href="home/{{ current_user.username }}">プロフィール</a>
                 <a class="mdl-navigation__link" href="/home/other">その他</a>
                 <a class="mdl-navigation__link" href="/logout">ログアウト</a>
                 {% endif %}

@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
 
 {% block body %}
+
 <div class="about-container">
     <div class="about-item">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for msg in messages %}
+        <div class="alert" role="alert">
+            {{ msg }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         <h4><span>アカウント作成</span></h4>
 
         <form method="POST" enctype="multipart/form-data">
@@ -44,7 +54,6 @@
         <br>
         <a href="/signin">ログインはこちらから</a>
     </div>
-    <a class="links" target="_blank" href="https://icons8.com/icon/7kniG694XSWX/partying-face">icon by Icons8</a>
 </div>
 
 <style>

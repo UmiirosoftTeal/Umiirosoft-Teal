@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="page-content">
+    <div class="profileBox">
+        <div class="itemBox">
+            <table>
+                <td>
+                    <img class="userIcons" src="https://object.gamma410.win/teal/users/{{ username }}.jpg">
+                </td>
+                <td>
+                    <h2>{{ username }}</h2>
+                    <h6>{{ user.userdetail }}</h6>
+                </td>
+            </table>
+        </div>
+        <div class="itemBox boxas">
+            <p style="font-size:17px;letter-spacing:1.5px;">STATUS</p>
+            <div class="flex-prof">
+                <p style="font-size:17px;letter-spacing:1.5px;">投稿</p>
+                <p style="font-size:17px;letter-spacing:1.5px;word-break:break-all;">{{ count }} 件</p>
+            </div>
+        </div>
+    </div>
+    {% for post in post %}
+    <div class="tweet-item shadow">
+        <table>
+            <td>
+                <img class="user-icon" src="https://object.gamma410.win/teal/users/{{post.postUser}}.jpg">
+            </td>
+            <td>
+                <p class="user-name">{{ post.postUser }}</p>
+                <p>{{ post.postTweet | replace('\n', '<br>') | safe}}</p>
+                {% if post.imgUrl != None %}
+                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{post.imgUrl}}">
+                {% endif %}
+            </td>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

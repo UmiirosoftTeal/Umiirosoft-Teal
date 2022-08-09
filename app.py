@@ -1,7 +1,7 @@
 # Umiirosoft Teal | coding by @gamma_410
 # Copyright 2022 Umiirosoft.
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -101,6 +101,14 @@ def home():
 
         return redirect('/home')
 
+@app.route('/home/<string:username>', methods=['GET', 'POST'])
+def profile(username):
+    post = Post.query.filter_by(postUser=username).order_by(Post.id.desc()).all()
+    count = Post.query.filter_by(postUser=username).count()
+    user = User.query.filter_by(username=username).first()
+    return render_template("profile.html", username=username, post=post, user=user, count=count)
+
+# ログイン前系統
 
 @app.route('/about')
 def about():
@@ -113,6 +121,18 @@ def signin():
         useremail = request.form.get('useremail')
         password = request.form.get('password')
 
+        if useremail:
+            print("ok")
+        else:
+            flash("メールアドレスが入力されていません")
+            return redirect('/signin')
+        
+        if password:
+            print("ok")
+        else:
+            flash("パスワードが入力されていません")
+            return redirect('/signin')
+        
         # Userテーブルからusernameに一致するユーザを取得
         user = User.query.filter_by(useremail=useremail).first()
         if check_password_hash(user.password, password):
@@ -120,6 +140,7 @@ def signin():
             return redirect('/home')
 
         else:
+            flash("メールアドレスまたはパスワードが間違っています。<br>ご確認の上もう一度お試しください。")
             return redirect('/signin')
 
     else:
@@ -133,8 +154,40 @@ def signup():
         username = request.form.get('username')
         useremail = request.form.get('useremail')
         password = request.form.get('password')
-        userdetail = " "
+        userdetail = "自己紹介を設定しよう！"
 
+        if usericon:
+            print("ok")    
+        else:
+            flash("アイコン画像が設定されていません")
+            return redirect('/signup')
+
+        if username:
+            print("ok")
+        else:
+            flash("ユーザー名が設定されていません")
+            return redirect('/signup')
+
+        if useremail:
+            print("ok")
+        else:    
+            flash("メールアドレスが設定されていません")
+            return redirect('/signup')
+
+        if password:
+            print("ok")
+        else:
+            flash("パスワードが設定されていません")
+            return redirect('/signup')
+
+        userData = User.query.filter_by(username=username).first()
+
+        if userData == None:
+            print("ok")
+        else:
+            flash("同じ名前のユーザーが既に存在しています")
+            return redirect('/signup')
+        
         iconUrl = username + ".jpg"  # ファイル名
         iconMetaData = "image/jpeg"  # フォーマット指定
 
@@ -147,6 +200,8 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
+        flash("アカウント作成が完了しました！")
+        
         return redirect('/signin')
 
     else:
