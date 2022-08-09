@@ -1,0 +1,83 @@
+*** Starting uWSGI 2.0.20 (64bit) on [Wed Aug 10 05:40:37 2022] ***
+compiled with version: 9.4.0 on 09 August 2022 08:27:33
+os: Linux-5.15.0-43-generic #46~20.04.1-Ubuntu SMP Thu Jul 14 15:20:17 UTC 2022
+nodename: v133-18-174-93
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /root/Umiirosoft-Teal
+detected binary path: /root/Umiirosoft-Teal/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 7426
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /tmp/creer.sock fd 3
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x56319ca2d9f0
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 72904 bytes (71 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x56319ca2d9f0 pid: 6469 (default app)
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI worker 1 (and the only) (pid: 6469, cores: 1)
+*** Starting uWSGI 2.0.20 (64bit) on [Wed Aug 10 05:41:27 2022] ***
+compiled with version: 9.4.0 on 09 August 2022 08:27:33
+os: Linux-5.15.0-43-generic #46~20.04.1-Ubuntu SMP Thu Jul 14 15:20:17 UTC 2022
+nodename: v133-18-174-93
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /root/Umiirosoft-Teal
+detected binary path: /root/Umiirosoft-Teal/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 7426
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /tmp/teal.sock fd 3
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55f3f9b6e9f0
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 72904 bytes (71 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x55f3f9b6e9f0 pid: 6478 (default app)
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI worker 1 (and the only) (pid: 6478, cores: 1)
+[pid: 6478|app: 0|req: 1/1] 131.147.63.161 () {50 vars in 808 bytes} [Wed Aug 10 05:42:12 2022] GET / => generated 197 bytes in 3 msecs (HTTP/1.1 302) 3 headers in 100 bytes (1 switches on core 0)
+[pid: 6478|app: 0|req: 2/2] 131.147.63.161 () {50 vars in 816 bytes} [Wed Aug 10 05:42:12 2022] GET /home => generated 199 bytes in 1 msecs (HTTP/1.1 302) 3 headers in 101 bytes (1 switches on core 0)
+[pid: 6478|app: 0|req: 3/3] 131.147.63.161 () {50 vars in 818 bytes} [Wed Aug 10 05:42:12 2022] GET /about => generated 3550 bytes in 14 msecs (HTTP/1.1 200) 2 headers in 81 bytes (1 switches on core 0)
+[pid: 6478|app: 0|req: 4/4] 131.147.63.161 () {48 vars in 753 bytes} [Wed Aug 10 05:42:13 2022] GET /static/style.css => generated 7168 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 7 headers in 280 bytes (0 switches on core 0)
+[pid: 6478|app: 0|req: 5/5] 131.147.63.161 () {48 vars in 755 bytes} [Wed Aug 10 05:42:13 2022] GET /static/service-worker.js => generated 249 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 301 bytes (0 switches on core 0)
+[pid: 6478|app: 0|req: 6/6] 131.147.63.161 () {48 vars in 786 bytes} [Wed Aug 10 05:42:13 2022] GET /static/images/icon_p.png => generated 8293 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 268 bytes (0 switches on core 0)
+[pid: 6478|app: 0|req: 7/7] 131.147.63.161 () {48 vars in 782 bytes} [Wed Aug 10 05:42:13 2022] GET /static/images/logo.svg => generated 4734 bytes in 0 msecs via sendfile() (HTTP/1.1 200) 7 headers in 285 bytes (0 switches on core 0)
+[pid: 6478|app: 0|req: 8/8] 131.147.63.161 () {52 vars in 801 bytes} [Wed Aug 10 05:42:13 2022] GET /static/service-worker.js => generated 249 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 301 bytes (0 switches on core 0)
+[pid: 6478|app: 0|req: 9/9] 131.147.63.161 () {48 vars in 760 bytes} [Wed Aug 10 05:42:13 2022] GET /favicon.ico => generated 207 bytes in 1 msecs (HTTP/1.1 404) 2 headers in 87 bytes (1 switches on core 0)
+[pid: 6478|app: 0|req: 10/10] 131.147.63.161 () {52 vars in 874 bytes} [Wed Aug 10 05:42:15 2022] GET /signin => generated 3851 bytes in 4 msecs (HTTP/1.1 200) 2 headers in 81 bytes (1 switches on core 0)
+[pid: 6478|app: 0|req: 11/11] 131.147.63.161 () {52 vars in 866 bytes} [Wed Aug 10 05:42:15 2022] GET /static/style.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 6478|app: 0|req: 12/12] 131.147.63.161 () {52 vars in 868 bytes} [Wed Aug 10 05:42:15 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 6478|app: 0|req: 13/13] 131.147.63.161 () {52 vars in 896 bytes} [Wed Aug 10 05:42:15 2022] GET /static/images/logo.svg => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
