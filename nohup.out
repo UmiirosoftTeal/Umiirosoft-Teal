@@ -991,3 +991,463 @@ uWSGI running as root, you can use --uid/--gid/--chroot options
 *** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
 *** uWSGI is running in multiple interpreter mode ***
 spawned uWSGI worker 1 (and the only) (pid: 14527, cores: 1)
+--- no python application found, check your startup logs for errors ---
+[pid: 14527|app: -1|req: -1/1] 150.66.91.57 () {54 vars in 1103 bytes} [Wed Aug 10 22:08:05 2022] GET /home => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 14527|app: -1|req: -1/2] 150.66.91.57 () {50 vars in 991 bytes} [Wed Aug 10 22:08:05 2022] GET /favicon.ico => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 14527|app: -1|req: -1/3] 150.66.91.57 () {54 vars in 1103 bytes} [Wed Aug 10 22:08:12 2022] GET /home => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 14527|app: -1|req: -1/4] 150.66.91.57 () {54 vars in 1103 bytes} [Wed Aug 10 22:08:13 2022] GET /home => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 14527|app: -1|req: -1/5] 150.66.91.57 () {52 vars in 1040 bytes} [Wed Aug 10 22:08:17 2022] GET / => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+*** Starting uWSGI 2.0.20 (64bit) on [Wed Aug 10 22:08:50 2022] ***
+compiled with version: 9.4.0 on 09 August 2022 08:27:33
+os: Linux-5.15.0-43-generic #46~20.04.1-Ubuntu SMP Thu Jul 14 15:20:17 UTC 2022
+nodename: v133-18-174-93
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /root/Umiirosoft-Teal
+detected binary path: /root/Umiirosoft-Teal/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 7426
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /tmp/teal.sock fd 3
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55a4035b79f0
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 72904 bytes (71 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55a4035b79f0 pid: 14651 (default app)
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI worker 1 (and the only) (pid: 14651, cores: 1)
+*** Starting uWSGI 2.0.20 (64bit) on [Wed Aug 10 22:09:43 2022] ***
+compiled with version: 9.4.0 on 09 August 2022 08:27:33
+os: Linux-5.15.0-43-generic #46~20.04.1-Ubuntu SMP Thu Jul 14 15:20:17 UTC 2022
+nodename: v133-18-174-93
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /root/Umiirosoft-Teal
+detected binary path: /root/Umiirosoft-Teal/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 7426
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /tmp/teal.sock fd 3
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55f85040e9f0
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 72904 bytes (71 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x55f85040e9f0 pid: 14671 (default app)
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI worker 1 (and the only) (pid: 14671, cores: 1)
+[pid: 14671|app: 0|req: 1/1] 150.66.91.57 () {52 vars in 1040 bytes} [Wed Aug 10 22:09:50 2022] GET / => generated 197 bytes in 3 msecs (HTTP/1.1 302) 3 headers in 100 bytes (1 switches on core 0)
+[2022-08-10 22:09:50,688] ERROR in app: Exception on /home [GET]
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.replyUser
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/root/Umiirosoft-Teal/./app.py", line 69, in home
+    tweets = Post.query.order_by(Post.id.desc()).all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2768, in all
+    return self._iter().all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2903, in _iter
+    result = self.session.execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1712, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.replyUser
+[SQL: SELECT post.id AS post_id, post."postUser" AS "post_postUser", post."postTweet" AS "post_postTweet", post."replyUser" AS "post_replyUser", post."replyTweet" AS "post_replyTweet", post."imgUrl" AS "post_imgUrl" 
+FROM post ORDER BY post.id DESC]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[pid: 14671|app: 0|req: 2/2] 150.66.91.57 () {52 vars in 1048 bytes} [Wed Aug 10 22:09:50 2022] GET /home => generated 265 bytes in 39 msecs (HTTP/1.1 500) 3 headers in 113 bytes (1 switches on core 0)
+[2022-08-10 22:09:57,820] ERROR in app: Exception on /home [GET]
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.replyUser
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/root/Umiirosoft-Teal/./app.py", line 69, in home
+    tweets = Post.query.order_by(Post.id.desc()).all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2768, in all
+    return self._iter().all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2903, in _iter
+    result = self.session.execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1712, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.replyUser
+[SQL: SELECT post.id AS post_id, post."postUser" AS "post_postUser", post."postTweet" AS "post_postTweet", post."replyUser" AS "post_replyUser", post."replyTweet" AS "post_replyTweet", post."imgUrl" AS "post_imgUrl" 
+FROM post ORDER BY post.id DESC]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[pid: 14671|app: 0|req: 3/3] 150.66.91.57 () {52 vars in 1048 bytes} [Wed Aug 10 22:09:57 2022] GET /home => generated 265 bytes in 4 msecs (HTTP/1.1 500) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 4/4] 150.66.91.57 () {50 vars in 814 bytes} [Wed Aug 10 22:10:03 2022] GET /home => generated 199 bytes in 1 msecs (HTTP/1.1 302) 3 headers in 101 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 5/5] 150.66.91.57 () {50 vars in 816 bytes} [Wed Aug 10 22:10:03 2022] GET /about => generated 3550 bytes in 17 msecs (HTTP/1.1 200) 2 headers in 81 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 6/6] 150.66.91.57 () {48 vars in 751 bytes} [Wed Aug 10 22:10:03 2022] GET /static/style.css => generated 7336 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 7 headers in 279 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 7/7] 150.66.91.57 () {48 vars in 753 bytes} [Wed Aug 10 22:10:03 2022] GET /static/service-worker.js => generated 249 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 301 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 8/8] 150.66.91.57 () {48 vars in 784 bytes} [Wed Aug 10 22:10:05 2022] GET /static/images/icon_p.png => generated 8293 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 268 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 9/9] 150.66.91.57 () {48 vars in 780 bytes} [Wed Aug 10 22:10:05 2022] GET /static/images/logo.svg => generated 4734 bytes in 0 msecs via sendfile() (HTTP/1.1 200) 7 headers in 285 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 10/10] 150.66.91.57 () {52 vars in 799 bytes} [Wed Aug 10 22:10:05 2022] GET /static/service-worker.js => generated 249 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 301 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 11/11] 150.66.91.57 () {48 vars in 758 bytes} [Wed Aug 10 22:10:05 2022] GET /favicon.ico => generated 207 bytes in 1 msecs (HTTP/1.1 404) 2 headers in 87 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 12/12] 150.66.91.57 () {52 vars in 872 bytes} [Wed Aug 10 22:10:10 2022] GET /signup => generated 5510 bytes in 5 msecs (HTTP/1.1 200) 2 headers in 81 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 13/13] 150.66.91.57 () {52 vars in 866 bytes} [Wed Aug 10 22:10:10 2022] GET /static/service-worker.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 14/14] 150.66.91.57 () {52 vars in 863 bytes} [Wed Aug 10 22:10:10 2022] GET /static/style.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 15/15] 150.66.91.57 () {52 vars in 894 bytes} [Wed Aug 10 22:10:10 2022] GET /static/images/logo.svg => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 16/16] 150.66.91.57 () {52 vars in 872 bytes} [Wed Aug 10 22:10:12 2022] GET /signup => generated 5510 bytes in 1 msecs (HTTP/1.1 200) 2 headers in 81 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 17/17] 150.66.91.57 () {52 vars in 866 bytes} [Wed Aug 10 22:10:13 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 18/18] 150.66.91.57 () {52 vars in 863 bytes} [Wed Aug 10 22:10:13 2022] GET /static/style.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 19/19] 150.66.91.57 () {52 vars in 894 bytes} [Wed Aug 10 22:10:13 2022] GET /static/images/logo.svg => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 20/20] 150.66.91.57 () {52 vars in 872 bytes} [Wed Aug 10 22:10:15 2022] GET /signin => generated 3851 bytes in 9 msecs (HTTP/1.1 200) 2 headers in 81 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 21/21] 150.66.91.57 () {52 vars in 863 bytes} [Wed Aug 10 22:10:15 2022] GET /static/style.css => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 22/22] 150.66.91.57 () {52 vars in 866 bytes} [Wed Aug 10 22:10:15 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 23/23] 150.66.91.57 () {52 vars in 894 bytes} [Wed Aug 10 22:10:15 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+ok
+ok
+[pid: 14671|app: 0|req: 24/24] 150.66.91.57 () {58 vars in 1136 bytes} [Wed Aug 10 22:10:18 2022] POST /signin => generated 197 bytes in 9 msecs (HTTP/1.1 302) 5 headers in 365 bytes (1 switches on core 0)
+[2022-08-10 22:10:18,357] ERROR in app: Exception on /home [GET]
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.replyUser
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/root/Umiirosoft-Teal/./app.py", line 69, in home
+    tweets = Post.query.order_by(Post.id.desc()).all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2768, in all
+    return self._iter().all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2903, in _iter
+    result = self.session.execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1712, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.replyUser
+[SQL: SELECT post.id AS post_id, post."postUser" AS "post_postUser", post."postTweet" AS "post_postTweet", post."replyUser" AS "post_replyUser", post."replyTweet" AS "post_replyTweet", post."imgUrl" AS "post_imgUrl" 
+FROM post ORDER BY post.id DESC]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[pid: 14671|app: 0|req: 25/25] 150.66.91.57 () {54 vars in 1103 bytes} [Wed Aug 10 22:10:18 2022] GET /home => generated 265 bytes in 5 msecs (HTTP/1.1 500) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 26/26] 150.66.91.57 () {52 vars in 869 bytes} [Wed Aug 10 22:10:24 2022] GET /home => generated 199 bytes in 1 msecs (HTTP/1.1 302) 3 headers in 101 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 27/27] 150.66.91.57 () {52 vars in 871 bytes} [Wed Aug 10 22:10:24 2022] GET /about => generated 3550 bytes in 1 msecs (HTTP/1.1 200) 2 headers in 81 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 28/28] 150.66.91.57 () {48 vars in 753 bytes} [Wed Aug 10 22:10:24 2022] GET /static/service-worker.js => generated 249 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 301 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 29/29] 150.66.91.57 () {48 vars in 751 bytes} [Wed Aug 10 22:10:24 2022] GET /static/style.css => generated 7336 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 279 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 30/30] 150.66.91.57 () {48 vars in 784 bytes} [Wed Aug 10 22:10:25 2022] GET /static/images/icon_p.png => generated 8293 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 268 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 31/31] 150.66.91.57 () {48 vars in 780 bytes} [Wed Aug 10 22:10:25 2022] GET /static/images/logo.svg => generated 4734 bytes in 0 msecs via sendfile() (HTTP/1.1 200) 7 headers in 285 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 32/32] 150.66.91.57 () {52 vars in 799 bytes} [Wed Aug 10 22:10:25 2022] GET /static/service-worker.js => generated 249 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 301 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 33/33] 150.66.91.57 () {48 vars in 758 bytes} [Wed Aug 10 22:10:25 2022] GET /favicon.ico => generated 207 bytes in 1 msecs (HTTP/1.1 404) 2 headers in 87 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 34/34] 150.66.91.57 () {52 vars in 872 bytes} [Wed Aug 10 22:10:27 2022] GET /signin => generated 3851 bytes in 1 msecs (HTTP/1.1 200) 2 headers in 81 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 35/35] 150.66.91.57 () {52 vars in 866 bytes} [Wed Aug 10 22:10:27 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 36/36] 150.66.91.57 () {52 vars in 863 bytes} [Wed Aug 10 22:10:27 2022] GET /static/style.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 37/37] 150.66.91.57 () {52 vars in 894 bytes} [Wed Aug 10 22:10:27 2022] GET /static/images/logo.svg => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+ok
+ok
+[pid: 14671|app: 0|req: 38/38] 150.66.91.57 () {58 vars in 1138 bytes} [Wed Aug 10 22:10:30 2022] POST /signin => generated 197 bytes in 6 msecs (HTTP/1.1 302) 5 headers in 365 bytes (1 switches on core 0)
+[2022-08-10 22:10:30,638] ERROR in app: Exception on /home [GET]
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.replyUser
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/root/Umiirosoft-Teal/./app.py", line 69, in home
+    tweets = Post.query.order_by(Post.id.desc()).all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2768, in all
+    return self._iter().all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2903, in _iter
+    result = self.session.execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1712, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.replyUser
+[SQL: SELECT post.id AS post_id, post."postUser" AS "post_postUser", post."postTweet" AS "post_postTweet", post."replyUser" AS "post_replyUser", post."replyTweet" AS "post_replyTweet", post."imgUrl" AS "post_imgUrl" 
+FROM post ORDER BY post.id DESC]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[pid: 14671|app: 0|req: 39/39] 150.66.91.57 () {54 vars in 1103 bytes} [Wed Aug 10 22:10:30 2022] GET /home => generated 265 bytes in 6 msecs (HTTP/1.1 500) 3 headers in 113 bytes (1 switches on core 0)
+[2022-08-10 22:10:32,738] ERROR in app: Exception on /home [GET]
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.replyUser
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/root/Umiirosoft-Teal/./app.py", line 69, in home
+    tweets = Post.query.order_by(Post.id.desc()).all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2768, in all
+    return self._iter().all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2903, in _iter
+    result = self.session.execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1712, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.replyUser
+[SQL: SELECT post.id AS post_id, post."postUser" AS "post_postUser", post."postTweet" AS "post_postTweet", post."replyUser" AS "post_replyUser", post."replyTweet" AS "post_replyTweet", post."imgUrl" AS "post_imgUrl" 
+FROM post ORDER BY post.id DESC]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[pid: 14671|app: 0|req: 40/40] 150.66.91.57 () {54 vars in 1103 bytes} [Wed Aug 10 22:10:32 2022] GET /home => generated 265 bytes in 7 msecs (HTTP/1.1 500) 3 headers in 113 bytes (1 switches on core 0)
+[2022-08-10 22:10:34,057] ERROR in app: Exception on /home [GET]
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: post.replyUser
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 2525, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1822, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1820, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask/app.py", line 1796, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/root/Umiirosoft-Teal/./app.py", line 69, in home
+    tweets = Post.query.order_by(Post.id.desc()).all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2768, in all
+    return self._iter().all()
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 2903, in _iter
+    result = self.session.execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1712, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1631, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 332, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1498, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/Umiirosoft-Teal/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: post.replyUser
+[SQL: SELECT post.id AS post_id, post."postUser" AS "post_postUser", post."postTweet" AS "post_postTweet", post."replyUser" AS "post_replyUser", post."replyTweet" AS "post_replyTweet", post."imgUrl" AS "post_imgUrl" 
+FROM post ORDER BY post.id DESC]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[pid: 14671|app: 0|req: 41/41] 150.66.91.57 () {54 vars in 1103 bytes} [Wed Aug 10 22:10:34 2022] GET /home => generated 265 bytes in 5 msecs (HTTP/1.1 500) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 42/42] 150.66.91.57 () {54 vars in 1103 bytes} [Wed Aug 10 22:11:31 2022] GET /home => generated 199 bytes in 5 msecs (HTTP/1.1 302) 4 headers in 115 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 43/43] 150.66.91.57 () {54 vars in 1105 bytes} [Wed Aug 10 22:11:31 2022] GET /about => generated 3550 bytes in 4 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 44/44] 150.66.91.57 () {50 vars in 985 bytes} [Wed Aug 10 22:11:31 2022] GET /static/style.css => generated 7336 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 7 headers in 279 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 45/45] 150.66.91.57 () {54 vars in 1099 bytes} [Wed Aug 10 22:11:31 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 46/46] 150.66.91.57 () {54 vars in 1131 bytes} [Wed Aug 10 22:11:31 2022] GET /static/images/icon_p.png => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 185 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 47/47] 150.66.91.57 () {54 vars in 1127 bytes} [Wed Aug 10 22:11:31 2022] GET /static/images/logo.svg => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 48/48] 150.66.91.57 () {54 vars in 1106 bytes} [Wed Aug 10 22:11:33 2022] GET /signin => generated 3851 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 49/49] 150.66.91.57 () {54 vars in 1100 bytes} [Wed Aug 10 22:11:33 2022] GET /static/service-worker.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 50/50] 150.66.91.57 () {54 vars in 1097 bytes} [Wed Aug 10 22:11:33 2022] GET /static/style.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 51/51] 150.66.91.57 () {54 vars in 1128 bytes} [Wed Aug 10 22:11:33 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 52/52] 150.66.91.57 () {54 vars in 1106 bytes} [Wed Aug 10 22:11:35 2022] GET /signup => generated 5510 bytes in 3 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 53/53] 150.66.91.57 () {54 vars in 1100 bytes} [Wed Aug 10 22:11:35 2022] GET /static/service-worker.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 54/54] 150.66.91.57 () {54 vars in 1097 bytes} [Wed Aug 10 22:11:35 2022] GET /static/style.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 55/55] 150.66.91.57 () {54 vars in 1128 bytes} [Wed Aug 10 22:11:35 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+ok
+ok
+ok
+ok
+ok
+[pid: 14671|app: 0|req: 56/56] 150.66.91.57 () {60 vars in 1376 bytes} [Wed Aug 10 22:11:48 2022] POST /signup => generated 201 bytes in 288 msecs (HTTP/1.1 302) 5 headers in 466 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 57/57] 150.66.91.57 () {54 vars in 1206 bytes} [Wed Aug 10 22:11:48 2022] GET /signin => generated 3992 bytes in 3 msecs (HTTP/1.1 200) 4 headers in 346 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 58/58] 150.66.91.57 () {54 vars in 1097 bytes} [Wed Aug 10 22:11:49 2022] GET /static/style.css => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 59/59] 150.66.91.57 () {54 vars in 1100 bytes} [Wed Aug 10 22:11:49 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 60/60] 150.66.91.57 () {54 vars in 1128 bytes} [Wed Aug 10 22:11:49 2022] GET /static/images/logo.svg => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+ok
+ok
+[pid: 14671|app: 0|req: 61/61] 150.66.91.57 () {60 vars in 1370 bytes} [Wed Aug 10 22:11:51 2022] POST /signin => generated 197 bytes in 8 msecs (HTTP/1.1 302) 5 headers in 364 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 62/62] 150.66.91.57 () {54 vars in 1102 bytes} [Wed Aug 10 22:11:52 2022] GET /home => generated 5732 bytes in 21 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 63/63] 150.66.91.57 () {54 vars in 1094 bytes} [Wed Aug 10 22:11:52 2022] GET /static/style.css => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 64/64] 150.66.91.57 () {50 vars in 965 bytes} [Wed Aug 10 22:11:52 2022] GET /static/main.js => generated 3772 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 293 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 65/65] 150.66.91.57 () {54 vars in 1097 bytes} [Wed Aug 10 22:11:52 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 66/66] 150.66.91.57 () {54 vars in 1125 bytes} [Wed Aug 10 22:11:52 2022] GET /static/images/logo.svg => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 67/67] 150.66.91.57 () {54 vars in 1128 bytes} [Wed Aug 10 22:11:54 2022] GET /home/profile/gamma => generated 4173 bytes in 28 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 68/68] 150.66.91.57 () {54 vars in 1108 bytes} [Wed Aug 10 22:11:54 2022] GET /static/style.css => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 69/69] 150.66.91.57 () {54 vars in 1111 bytes} [Wed Aug 10 22:11:54 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 70/70] 150.66.91.57 () {54 vars in 1139 bytes} [Wed Aug 10 22:11:54 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 71/71] 150.66.91.57 () {54 vars in 1114 bytes} [Wed Aug 10 22:11:56 2022] GET /home => generated 5732 bytes in 7 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 14671|app: 0|req: 72/72] 150.66.91.57 () {54 vars in 1094 bytes} [Wed Aug 10 22:11:57 2022] GET /static/style.css => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 73/73] 150.66.91.57 () {54 vars in 1097 bytes} [Wed Aug 10 22:11:57 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 74/74] 150.66.91.57 () {54 vars in 1078 bytes} [Wed Aug 10 22:11:57 2022] GET /static/main.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 182 bytes (0 switches on core 0)
+[pid: 14671|app: 0|req: 75/75] 150.66.91.57 () {54 vars in 1125 bytes} [Wed Aug 10 22:11:57 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
