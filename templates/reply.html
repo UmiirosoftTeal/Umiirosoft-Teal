@@ -3,13 +3,27 @@
 {% block body %}
 <div id="loading"></div>
 <div class="page-content">
+    <div class="tweet-item shadow">
+        <table>
+            <td>
+                <img class="user-icon" src="https://object.gamma410.win/teal/users/{{ post.postUser }}.jpg">
+            </td>
+            <td>
+                <p class="user-name">{{ post.postUser }}</p>
+                <p>{{ post.postTweet | replace('\n', '<br>') | safe}}</p>
+                {% if post.imgUrl != None %}
+                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{ post.imgUrl }}">
+                {% endif %}
+            </td>
+        </table>
+    </div>
     <div class="tweet-item postTools shadow">
-        <form id="Box" action="/home" method="POST" enctype="multipart/form-data">
+        <form id="Box" action="/home/{{ post.postUser }}/{{ post.postTweet }}" method="POST" enctype="multipart/form-data">
             <p id="textCount"></p>
             <div class="mdl-textfield mdl-js-textfield">
                 <textarea name="postTweet" class="mdl-textfield__input" rows="3" type="text"
                     onkeyup="ShowLength(value)"></textarea>
-                <label class="mdl-textfield__label" for="sample5">いま何してる？</label>
+                <label class="mdl-textfield__label" for="sample5">返信を投稿</label>
             </div>
             <div class="btn-cover">
                 <label for="file_upload">
@@ -27,22 +41,20 @@
         </form>
     </div>
 
-    {% for tweet in tweets %}
+    {% for reply in reply %}
     <div class="tweet-item shadow">
-        <a href="/home/{{ tweet.postUser }}/{{ tweet.postTweet }}">
         <table>
             <td>
-                <img class="user-icon" src="https://object.gamma410.win/teal/users/{{tweet.postUser}}.jpg">
+                <img class="user-icon" src="https://object.gamma410.win/teal/users/{{reply.postUser}}.jpg">
             </td>
             <td>
-                <p class="user-name">{{ tweet.postUser }}</p>
-                <p>{{ tweet.postTweet | replace('\n', '<br>') | safe}}</p>
-                {% if tweet.imgUrl != None %}
-                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{tweet.imgUrl}}">
+                <p class="user-name">{{ reply.postUser }}</p>
+                <p>{{ reply.postTweet | replace('\n', '<br>') | safe}}</p>
+                {% if reply.imgUrl != None %}
+                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{reply.imgUrl}}">
                 {% endif %}
             </td>
         </table>
-        </a>
     </div>
     {% endfor %}
 

@@ -52,7 +52,7 @@ body {
 }
 
 .shadow {
-    box-shadow: var(--tealBoxShadow);
+    box-shadow: 0px 1px 1px 1.5px rgba(211, 211, 211, 0.51);
 }
 
 .btn-cover {
@@ -365,7 +365,7 @@ span {
     padding-bottom: 30px;
 }
 .itemBox {
-    box-shadow: var(--tealBoxShadow);
+    box-shadow: 0px 1px 1px 1px rgba(181, 181, 181, 0.477);
     border-radius: 2px;
     padding: 10px;
     word-break: break-all;
@@ -375,7 +375,7 @@ span {
     height: 100px;
     object-fit: cover;
     border-radius: 50%;
-    box-shadow: var(--tealBoxShadow);
+    box-shadow: 0px 1px 1px 1px rgba(181, 181, 181, 0.477);
     margin-left: 20px;
 }
 .profileBox h2 {
@@ -415,4 +415,11 @@ span {
     padding:20px;
     color:#ffffff;
     background: linear-gradient(to bottom, #0db795 50%, #109393 100%);
+}
+.prf-a {
+    margin: 20px;
+}
+.tweet-item a {
+    text-decoration: none;
+    color:rgb(65, 65, 65);
 }

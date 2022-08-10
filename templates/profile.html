@@ -2,15 +2,35 @@
 
 {% block body %}
 <div class="page-content">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for msg in messages %}
+    <div class="alert prf-a" role="alert">
+        {{ msg | safe}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div class="profileBox">
         <div class="itemBox">
             <table>
+                {% if username == current_user.username %}
+                <td>
+                        <img class="userIcons"
+                            src="https://object.gamma410.win/teal/users/{{ current_user.username }}.jpg">
+                        <a href="/home/profile/edit_profile/{{ current_user.username }}">
+                        <br>
+                        <span class="material-symbols-rounded">edit_square</span>
+                        </a>
+                </td>
+                {% else %}
                 <td>
                     <img class="userIcons" src="https://object.gamma410.win/teal/users/{{ username }}.jpg">
                 </td>
+                {% endif %}
                 <td>
                     <h2>{{ username }}</h2>
-                    <h6>{{ user.userdetail }}</h6>
+                    <h6>{{ user.userdetail | replace('\n', '<br>') | safe }}</h6>
                 </td>
             </table>
         </div>

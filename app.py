@@ -1,6 +1,7 @@
 # Umiirosoft Teal | coding by @gamma_410
 # Copyright 2022 Umiirosoft.
 
+from importlib.metadata import requires
 from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -30,7 +31,8 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     postUser = db.Column(db.String(20), nullable=False)
     postTweet = db.Column(db.String(280), nullable=True)
-    videoUrl = db.Column(db.Text)
+    replyUser = db.Column(db.Text)
+    replyTweet = db.Column(db.Text)
     imgUrl = db.Column(db.Text)
 
 # ログインデータ
@@ -70,9 +72,10 @@ def home():
     else:
         postUser = current_user.username
         postTweet = request.form.get('postTweet')
-        videoUrl = "test"  # request.files['videoUrl']
         picture = request.files['imgUrl']
-
+        postTweet = postTweet.replace('?', '？')
+        replyUser = None
+        replyTweet = None
         if picture:
 
             postTweetCode = postTweet.encode('utf-8')
@@ -86,7 +89,7 @@ def home():
                 picture, Bucket, f'picture/{imgUrl}', ExtraArgs={'ContentType': iconMetaData})
 
             new_post = Post(postUser=postUser, postTweet=postTweet,
-                            videoUrl=videoUrl, imgUrl=imgUrl)
+                            replyUser=replyUser, replyTweet=replyTweet, imgUrl=imgUrl)
 
             db.session.add(new_post)
             db.session.commit()
@@ -94,19 +97,99 @@ def home():
         else:
             imgUrl = None
             new_post = Post(postUser=postUser, postTweet=postTweet,
-                            videoUrl=videoUrl, imgUrl=imgUrl)
+                            replyUser=replyUser, replyTweet=replyTweet, imgUrl=imgUrl)
 
             db.session.add(new_post)
             db.session.commit()
 
         return redirect('/home')
 
-@app.route('/home/<string:username>', methods=['GET', 'POST'])
+@app.route('/home/profile/<string:username>', methods=['GET', 'POST'])
 def profile(username):
     post = Post.query.filter_by(postUser=username).order_by(Post.id.desc()).all()
     count = Post.query.filter_by(postUser=username).count()
     user = User.query.filter_by(username=username).first()
     return render_template("profile.html", username=username, post=post, user=user, count=count)
+
+
+@app.route('/home/profile/edit_profile/<string:username>', methods=['GET', 'POST'])
+def editProfile(username):
+    if request.method == "POST":
+        try:
+            usericon = request.files['userIcon']
+            userdetail = request.form.get('postUserDetail')
+            iconUrl = username + ".jpg"
+            iconMetaData = "image/jpeg"  # フォーマット
+
+            if usericon:
+                s3.upload_fileobj(usericon, Bucket, f'users/{iconUrl}', ExtraArgs={'ContentType': iconMetaData})
+            else:
+                print("パス")
+
+            if userdetail:
+                userData = User.query.filter_by(username=username).first()
+                userData.userdetail = userdetail
+                db.session.merge(userData)
+                db.session.commit()
+
+            else:
+                print("パス")
+
+            flash("プロフィールを変更しました！（WEBブラウザのキャッシュにより、すぐにアイコンが変更されない場合があります。）")
+            return redirect(f'/home/profile/{ username }')
+
+        except:
+            flash("プロフィールの変更に失敗しました...")
+            return redirect(f'/home/profile/{ username }')
+
+    else:
+        return render_template('editprof.html')
+
+
+@app.route('/home/<string:username>/<string:tweet>', methods=['GET', 'POST'])
+def reply(username, tweet):
+    if request.method == 'POST':
+        postUser = current_user.username
+        postTweet = request.form.get('postTweet')
+        replyUser = username
+        replyTweet = tweet
+        picture = request.files['imgUrl']
+
+        postTweet = postTweet.replace('?', '？')
+
+        if picture:
+
+            postTweetCode = postTweet.encode('utf-8')
+            imgUrlHex = postTweetCode.hex()
+            imgUrl = imgUrlHex + ".jpg"  # ファイル名
+            
+            iconMetaData = "image/jpeg"  # フォーマット指定
+
+            # S3 アップロード
+            s3.upload_fileobj(
+                picture, Bucket, f'picture/{imgUrl}', ExtraArgs={'ContentType': iconMetaData})
+
+            new_post = Post(postUser=postUser, postTweet=postTweet,
+                            replyUser=replyUser, replyTweet=replyTweet, imgUrl=imgUrl)
+
+            db.session.add(new_post)
+            db.session.commit()
+
+        else:
+            imgUrl = None
+            new_post = Post(postUser=postUser, postTweet=postTweet,
+                            replyUser=replyUser, replyTweet=replyTweet, imgUrl=imgUrl)
+
+            db.session.add(new_post)
+            db.session.commit()
+
+        return redirect(f'/home/{ username }/{ tweet }')
+
+    else:
+        post = Post.query.filter_by(postUser=username, postTweet=tweet).first()
+        reply = Post.query.filter_by(replyUser=username, replyTweet=tweet).order_by(Post.id.desc()).all()
+        return render_template('reply.html', post=post, reply=reply)
+
 
 # ログイン前系統
 
