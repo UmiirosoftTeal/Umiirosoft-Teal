@@ -28,8 +28,8 @@
     </div>
 
     {% for tweet in tweets %}
-    <div class="tweet-item shadow">
-        <a href="/home/{{ tweet.postUser }}/{{ tweet.postTweet }}">
+    <div class="tweet-item tweetBoxes shadow">
+        <a href="/home/{{ tweet.postUser }}/{{ tweet.postTweet }}/{{ tweet.postTweetHex }}/{{ tweet.imgUrl }}">
         <table>
             <td>
                 <img class="user-icon" src="https://object.gamma410.win/teal/users/{{tweet.postUser}}.jpg">
@@ -43,6 +43,24 @@
             </td>
         </table>
         </a>
+        {% if tweet.replyTweet != None %}
+        <a href="/home/{{ tweet.replyUser }}/{{ tweet.replyTweet }}/{{ tweet.replyTweetHex }}/{{ tweet.replyUrl | replace(Null, 'None') }}">
+        <div class="replyTweet">
+            <table>
+                <td>
+                    <img class="user-icon" src="https://object.gamma410.win/teal/users/{{tweet.postUser}}.jpg">
+                </td>
+                <td>
+                    <p class="user-name">{{ tweet.replyUser }}</p>
+                    <p>{{ tweet.replyTweet | replace('\n', '<br>') | safe}}</p>
+                    {% if tweet.replyImgUrl != None %}
+                    <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{ tweet.replyImgUrl }}">
+                    {% endif %}
+                </td>
+            </table>
+        </div>
+        </a>
+        {% endif %}
     </div>
     {% endfor %}
 

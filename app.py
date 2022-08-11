@@ -30,10 +30,13 @@ def load_user(user_id):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     postUser = db.Column(db.String(20), nullable=False)
-    postTweet = db.Column(db.String(280), nullable=True)
+    postTweet = db.Column(db.String(120), nullable=True)
+    postTweetHex = db.Column(db.Text)
+    imgUrl = db.Column(db.Text)
     replyUser = db.Column(db.Text)
     replyTweet = db.Column(db.Text)
-    imgUrl = db.Column(db.Text)
+    replyTweetHex = db.Column(db.Text)
+    replyImgUrl = db.Column(db.Text)
 
 # ログインデータ
 
@@ -74,8 +77,13 @@ def home():
         postTweet = request.form.get('postTweet')
         picture = request.files['imgUrl']
         postTweet = postTweet.replace('?', '？')
+        tweetHex = postTweet.encode('utf-8')
+        postTweetHex = tweetHex.hex()
         replyUser = None
         replyTweet = None
+        replyTweetHex = None
+        replyImgUrl = None
+
         if picture:
 
             postTweetCode = postTweet.encode('utf-8')
@@ -88,25 +96,27 @@ def home():
             s3.upload_fileobj(
                 picture, Bucket, f'picture/{imgUrl}', ExtraArgs={'ContentType': iconMetaData})
 
-            new_post = Post(postUser=postUser, postTweet=postTweet,
-                            replyUser=replyUser, replyTweet=replyTweet, imgUrl=imgUrl)
+            new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
+                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl)
 
             db.session.add(new_post)
             db.session.commit()
 
         else:
             imgUrl = None
-            new_post = Post(postUser=postUser, postTweet=postTweet,
-                            replyUser=replyUser, replyTweet=replyTweet, imgUrl=imgUrl)
+            new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
+                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl)
 
             db.session.add(new_post)
             db.session.commit()
 
         return redirect('/home')
 
+
 @app.route('/home/profile/<string:username>', methods=['GET', 'POST'])
 def profile(username):
-    post = Post.query.filter_by(postUser=username).order_by(Post.id.desc()).all()
+    post = Post.query.filter_by(
+        postUser=username).order_by(Post.id.desc()).all()
     count = Post.query.filter_by(postUser=username).count()
     user = User.query.filter_by(username=username).first()
     return render_template("profile.html", username=username, post=post, user=user, count=count)
@@ -122,7 +132,8 @@ def editProfile(username):
             iconMetaData = "image/jpeg"  # フォーマット
 
             if usericon:
-                s3.upload_fileobj(usericon, Bucket, f'users/{iconUrl}', ExtraArgs={'ContentType': iconMetaData})
+                s3.upload_fileobj(
+                    usericon, Bucket, f'users/{iconUrl}', ExtraArgs={'ContentType': iconMetaData})
             else:
                 print("パス")
 
@@ -146,13 +157,22 @@ def editProfile(username):
         return render_template('editprof.html')
 
 
-@app.route('/home/<string:username>/<string:tweet>', methods=['GET', 'POST'])
-def reply(username, tweet):
+@app.route('/home/<string:username>/<string:tweet>/<string:tweethex>/<string:img>', methods=['GET', 'POST'])
+def reply(username, tweet, tweethex, img):
     if request.method == 'POST':
         postUser = current_user.username
         postTweet = request.form.get('postTweet')
+        tweetHex = postTweet.encode('utf-8')
+        postTweetHex = tweetHex.hex()
         replyUser = username
         replyTweet = tweet
+        replyTweetHex = tweethex
+
+        if img == "None":
+            replyImgUrl = None
+        else:
+            replyImgUrl = img
+
         picture = request.files['imgUrl']
 
         postTweet = postTweet.replace('?', '？')
@@ -162,32 +182,34 @@ def reply(username, tweet):
             postTweetCode = postTweet.encode('utf-8')
             imgUrlHex = postTweetCode.hex()
             imgUrl = imgUrlHex + ".jpg"  # ファイル名
-            
+
             iconMetaData = "image/jpeg"  # フォーマット指定
 
             # S3 アップロード
             s3.upload_fileobj(
                 picture, Bucket, f'picture/{imgUrl}', ExtraArgs={'ContentType': iconMetaData})
 
-            new_post = Post(postUser=postUser, postTweet=postTweet,
-                            replyUser=replyUser, replyTweet=replyTweet, imgUrl=imgUrl)
+            new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
+                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl)
 
             db.session.add(new_post)
             db.session.commit()
 
         else:
             imgUrl = None
-            new_post = Post(postUser=postUser, postTweet=postTweet,
-                            replyUser=replyUser, replyTweet=replyTweet, imgUrl=imgUrl)
+            new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
+                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl)
 
             db.session.add(new_post)
             db.session.commit()
 
-        return redirect(f'/home/{ username }/{ tweet }')
+        return redirect(f'/home/{ username }/{ tweet }/{ tweethex }/{ img }')
 
     else:
-        post = Post.query.filter_by(postUser=username, postTweet=tweet).first()
-        reply = Post.query.filter_by(replyUser=username, replyTweet=tweet).order_by(Post.id.desc()).all()
+        post = Post.query.filter_by(
+            postUser=username, postTweetHex=tweethex).first()
+        reply = Post.query.filter_by(
+            replyUser=username, replyTweetHex=tweethex).order_by(Post.id.desc()).all()
         return render_template('reply.html', post=post, reply=reply)
 
 
@@ -209,13 +231,13 @@ def signin():
         else:
             flash("メールアドレスが入力されていません")
             return redirect('/signin')
-        
+
         if password:
             print("ok")
         else:
             flash("パスワードが入力されていません")
             return redirect('/signin')
-        
+
         # Userテーブルからusernameに一致するユーザを取得
         user = User.query.filter_by(useremail=useremail).first()
         if check_password_hash(user.password, password):
@@ -240,7 +262,7 @@ def signup():
         userdetail = "自己紹介を設定しよう！"
 
         if usericon:
-            print("ok")    
+            print("ok")
         else:
             flash("アイコン画像が設定されていません")
             return redirect('/signup')
@@ -253,7 +275,7 @@ def signup():
 
         if useremail:
             print("ok")
-        else:    
+        else:
             flash("メールアドレスが設定されていません")
             return redirect('/signup')
 
@@ -270,7 +292,7 @@ def signup():
         else:
             flash("同じ名前のユーザーが既に存在しています")
             return redirect('/signup')
-        
+
         iconUrl = username + ".jpg"  # ファイル名
         iconMetaData = "image/jpeg"  # フォーマット指定
 
@@ -284,7 +306,7 @@ def signup():
         db.session.commit()
 
         flash("アカウント作成が完了しました！")
-        
+
         return redirect('/signin')
 
     else:

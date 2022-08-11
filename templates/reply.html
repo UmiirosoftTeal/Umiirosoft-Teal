@@ -3,22 +3,22 @@
 {% block body %}
 <div id="loading"></div>
 <div class="page-content">
-    <div class="tweet-item shadow">
+    <div class="tweet-item toolskit shadow">
         <table>
             <td>
                 <img class="user-icon" src="https://object.gamma410.win/teal/users/{{ post.postUser }}.jpg">
             </td>
             <td>
                 <p class="user-name">{{ post.postUser }}</p>
-                <p>{{ post.postTweet | replace('\n', '<br>') | safe}}</p>
+                <p class="tweet-rp">{{ post.postTweet | replace('\n', '<br>') | safe}}</p>
                 {% if post.imgUrl != None %}
                 <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{ post.imgUrl }}">
                 {% endif %}
             </td>
         </table>
     </div>
-    <div class="tweet-item postTools shadow">
-        <form id="Box" action="/home/{{ post.postUser }}/{{ post.postTweet }}" method="POST" enctype="multipart/form-data">
+    <div class="tweet-item tools shadow">
+        <form id="Box" action="/home/{{ post.postUser }}/{{ post.postTweet }}/{{ post.postTweetHex }}/{{ post.imgUrl }}" method="POST" enctype="multipart/form-data">
             <p id="textCount"></p>
             <div class="mdl-textfield mdl-js-textfield">
                 <textarea name="postTweet" class="mdl-textfield__input" rows="3" type="text"
@@ -57,37 +57,6 @@
         </table>
     </div>
     {% endfor %}
-
-    <button id="show-dialog" type="button"
-        class="fixed_btn mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-        <i class="material-icons">add</i>
-    </button>
-
-    <dialog class="mdl-dialog">
-        <form id="mbBox" action="/home" method="POST" enctype="multipart/form-data">
-            <p id="textCount-mb"></p>
-            <div class="mdl-textfield mdl-js-textfield">
-                <textarea name="postTweet" class="mdl-textfield__input" type="text" rows="5"
-                    onkeyup="ShowLengthMB(value)"></textarea>
-                <label class="mdl-textfield__label" for="sample5">いま何してる？</label>
-            </div>
-            <div class="btn-cover">
-                <label for="file_uploads">
-                    <span class="material-symbols-rounded">imagesmode</span>
-                    <input type="file" id="file_uploads" accept="image/jpeg" style="display:none;"
-                        onchange="imgPreViewMB(event)" name="imgUrl">
-                </label>
-
-                <button onclick="onButtonMB()" id="tweetPush-mb" type="submit"
-                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                    投稿
-                </button>
-            </div>
-            <div id="preview-mb"></div>
-        </form>
-    </dialog>
-
 </div>
-
 <script src="{{ url_for('static', filename='main.js') }}"></script>
 {% endblock %}

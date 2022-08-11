@@ -27,7 +27,7 @@ tweetPushMB.style.display = "none";
 textCountMB.style.display = "none";
 
 function ShowLength(str) {
-    textCount.innerHTML = str.length + "文字";
+    textCount.innerHTML = str.length + "文字 / 120文字";
     if (str.length <= 0) {
         tweetPush.style.display = "none";
         textCount.style.display = "none";
@@ -41,7 +41,7 @@ function ShowLength(str) {
     if (str.length > 120) {
         tweetPush.disabled = true;
         const over = 120 - str.length;
-        textCount.innerHTML = "文字数制限 " + over;
+        textCount.innerHTML = "文字数制限 " + over + "文字";
     }
 }
 

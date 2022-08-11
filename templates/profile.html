@@ -14,31 +14,40 @@
     <div class="profileBox">
         <div class="itemBox">
             <table>
-                {% if username == current_user.username %}
-                <td>
-                        <img class="userIcons"
-                            src="https://object.gamma410.win/teal/users/{{ current_user.username }}.jpg">
-                        <a href="/home/profile/edit_profile/{{ current_user.username }}">
-                        <br>
-                        <span class="material-symbols-rounded">edit_square</span>
-                        </a>
-                </td>
-                {% else %}
                 <td>
                     <img class="userIcons" src="https://object.gamma410.win/teal/users/{{ username }}.jpg">
                 </td>
-                {% endif %}
                 <td>
                     <h2>{{ username }}</h2>
+                    <p>@{{ username }}.teal</p>
                     <h6>{{ user.userdetail | replace('\n', '<br>') | safe }}</h6>
                 </td>
             </table>
+            {% if username == current_user.username %}
+            <table>
+                <td>
+                    <a href="/home/profile/edit_profile/{{ current_user.username }}">
+                        <span class="material-symbols-rounded">edit_square</span>
+                    </a>
+                </td>
+            </table>
+            {% else %}
+            {% endif %}
         </div>
         <div class="itemBox boxas">
             <p style="font-size:17px;letter-spacing:1.5px;">STATUS</p>
+            <br>
             <div class="flex-prof">
-                <p style="font-size:17px;letter-spacing:1.5px;">投稿</p>
-                <p style="font-size:17px;letter-spacing:1.5px;word-break:break-all;">{{ count }} 件</p>
+                <p style="font-size:10px;letter-spacing:1.5px;">投稿</p>
+                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ count }} 件</p>
+            </div>
+            <div class="flex-prof">
+                <p style="font-size:10px;letter-spacing:1.5px;">フォロー</p>
+                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">0 人</p>
+            </div>
+            <div class="flex-prof">
+                <p style="font-size:10px;letter-spacing:1.5px;">フォロワー</p>
+                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">0 人</p>
             </div>
         </div>
     </div>
