@@ -6,19 +6,53 @@
     <div class="tweet-item toolskit shadow">
         <table>
             <td>
-                <img class="user-icon" src="https://object.gamma410.win/teal/users/{{ post.postUser }}.jpg">
+                <a href="/home/profile/{{ post.postUser }}">
+                    <img class="user-icon" src="https://object.gamma410.win/teal/users/{{ post.postUser }}.jpg">
+                </a>
             </td>
-            <td>
-                <p class="user-name">{{ post.postUser }}</p>
+            <td class="td">
+                <div class="postData">
+                    <p class="user-name">{{ post.postUser }}</p>
+                </div>
                 <p class="tweet-rp">{{ post.postTweet | replace('\n', '<br>') | safe}}</p>
                 {% if post.imgUrl != None %}
                 <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{ post.imgUrl }}">
                 {% endif %}
+                <div class="postData">
+                    <p class="user-id">@{{ post.postUser }}.teal</p>
+                    <p class="user-time">{{ post.timeH }}:{{ post.timeM }}・{{ post.dateY }}年{{ post.dateM }}月{{ post.dateD }}日</p>
+                </div>
             </td>
         </table>
+        {% if post.replyTweet != None %}
+        <a
+            href="/home/{{ post.replyUser }}/{{ post.replyTweet }}/{{ post.replyTweetHex }}/{{ post.replyUrl | replace(Null, 'None') }}">
+            <div class="replyTweet">
+                <table>
+                    <td>
+                        <a href="/home/profile/{{ post.replyUser }}">
+                            <img class="user-icon"
+                                src="https://object.gamma410.win/teal/users/{{ post.replyUser }}.jpg">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <div class="postData">
+                            <p class="user-name">{{ post.replyUser }}</p>
+                        </div>
+                        <p>{{ post.replyTweet | replace('\n', '<br>') | safe}}</p>
+                        {% if post.replyImgUrl != None %}
+                        <img class="tweet-item-img"
+                            src="https://object.gamma410.win/teal/picture/{{ post.replyImgUrl }}">
+                        {% endif %}
+                    </td>
+                </table>
+            </div>
+        </a>
+        {% endif %}
     </div>
     <div class="tweet-item tools shadow">
-        <form id="Box" action="/home/{{ post.postUser }}/{{ post.postTweet }}/{{ post.postTweetHex }}/{{ post.imgUrl }}" method="POST" enctype="multipart/form-data">
+        <form id="Box" action="/home/{{ post.postUser }}/{{ post.postTweet }}/{{ post.postTweetHex }}/{{ post.imgUrl }}"
+            method="POST" enctype="multipart/form-data">
             <p id="textCount"></p>
             <div class="mdl-textfield mdl-js-textfield">
                 <textarea name="postTweet" class="mdl-textfield__input" rows="3" type="text"
@@ -42,13 +76,18 @@
     </div>
 
     {% for reply in reply %}
-    <div class="tweet-item shadow">
+    <div class="tweet-item tweet-items shadow">
         <table>
             <td>
-                <img class="user-icon" src="https://object.gamma410.win/teal/users/{{reply.postUser}}.jpg">
+                <a href="/home/profile/{{ reply.postUser }}">
+                    <img class="user-icon" src="https://object.gamma410.win/teal/users/{{reply.postUser}}.jpg">
+                </a>
             </td>
-            <td>
-                <p class="user-name">{{ reply.postUser }}</p>
+            <td class="td">
+                <div class="postData">
+                    <p class="user-name">{{ reply.postUser }}</p>
+                    <p>{{ reply.timeH }}:{{ reply.timeM }}</p>
+                </div>
                 <p>{{ reply.postTweet | replace('\n', '<br>') | safe}}</p>
                 {% if reply.imgUrl != None %}
                 <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{reply.imgUrl}}">
@@ -58,5 +97,11 @@
     </div>
     {% endfor %}
 </div>
+<style>
+    .tweet-items {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
 <script src="{{ url_for('static', filename='main.js') }}"></script>
 {% endblock %}

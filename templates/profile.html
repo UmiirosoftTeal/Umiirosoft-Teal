@@ -19,7 +19,11 @@
                 </td>
                 <td>
                     <h2>{{ username }}</h2>
-                    <p>@{{ username }}.teal</p>
+                    {% if username == "gamma" %}
+                    <p># Teal運営</p>
+                    {% elif username == "Teal 公式" %}
+                    <p># Teal運営</p>
+                    {% endif %}
                     <h6>{{ user.userdetail | replace('\n', '<br>') | safe }}</h6>
                 </td>
             </table>
@@ -52,20 +56,29 @@
         </div>
     </div>
     {% for post in post %}
-    <div class="tweet-item shadow">
+    <div class="tweet-item tweet-items shadow">
         <table>
             <td>
                 <img class="user-icon" src="https://object.gamma410.win/teal/users/{{post.postUser}}.jpg">
             </td>
-            <td>
+            <td class="td">
                 <p class="user-name">{{ post.postUser }}</p>
                 <p>{{ post.postTweet | replace('\n', '<br>') | safe}}</p>
                 {% if post.imgUrl != None %}
                 <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{post.imgUrl}}">
                 {% endif %}
+                <div class="postData">
+                    <p class="user-time">{{ post.timeH }}:{{ post.timeM }}・{{ post.dateY }}年{{ post.dateM }}月{{ post.dateD }}日</p>
+                </div>
             </td>
         </table>
     </div>
     {% endfor %}
 </div>
+<style>
+    .tweet-items {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
 {% endblock %}

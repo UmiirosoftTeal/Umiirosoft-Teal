@@ -7,6 +7,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import boto3
+import datetime
+
 
 app = Flask(__name__)
 
@@ -37,10 +39,19 @@ class Post(db.Model):
     replyTweet = db.Column(db.Text)
     replyTweetHex = db.Column(db.Text)
     replyImgUrl = db.Column(db.Text)
+    dateY = db.Column(db.Text)
+    dateM = db.Column(db.Text)
+    dateD = db.Column(db.Text)
+    timeH = db.Column(db.Text)
+    timeM = db.Column(db.Text)
+    RdateY = db.Column(db.Text)
+    RdateM = db.Column(db.Text)
+    RdateD = db.Column(db.Text)
+    RtimeH = db.Column(db.Text)
+    RtimeM = db.Column(db.Text)
+
 
 # ログインデータ
-
-
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
@@ -73,16 +84,24 @@ def home():
         return render_template('index.html', tweets=tweets)
 
     else:
+        dt_now = datetime.datetime.now()
         postUser = current_user.username
         postTweet = request.form.get('postTweet')
         picture = request.files['imgUrl']
         postTweet = postTweet.replace('?', '？')
+        postTweet = postTweet.replace('#', '＃')
         tweetHex = postTweet.encode('utf-8')
         postTweetHex = tweetHex.hex()
         replyUser = None
         replyTweet = None
         replyTweetHex = None
         replyImgUrl = None
+        dateY = dt_now.strftime("%Y")
+        dateM = dt_now.strftime("%m")
+        dateD = dt_now.strftime("%d")
+        timeH = dt_now.strftime("%H")
+        timeM = dt_now.strftime("%M")
+
 
         if picture:
 
@@ -97,7 +116,8 @@ def home():
                 picture, Bucket, f'picture/{imgUrl}', ExtraArgs={'ContentType': iconMetaData})
 
             new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
-                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl)
+                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl,
+                            dateY=dateY, dateM=dateM, dateD=dateD, timeH=timeH, timeM=timeM)
 
             db.session.add(new_post)
             db.session.commit()
@@ -105,7 +125,8 @@ def home():
         else:
             imgUrl = None
             new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
-                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl)
+                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl,
+                            dateY=dateY, dateM=dateM, dateD=dateD, timeH=timeH, timeM=timeM)
 
             db.session.add(new_post)
             db.session.commit()
@@ -120,7 +141,6 @@ def profile(username):
     count = Post.query.filter_by(postUser=username).count()
     user = User.query.filter_by(username=username).first()
     return render_template("profile.html", username=username, post=post, user=user, count=count)
-
 
 @app.route('/home/profile/edit_profile/<string:username>', methods=['GET', 'POST'])
 def editProfile(username):
@@ -160,13 +180,21 @@ def editProfile(username):
 @app.route('/home/<string:username>/<string:tweet>/<string:tweethex>/<string:img>', methods=['GET', 'POST'])
 def reply(username, tweet, tweethex, img):
     if request.method == 'POST':
+        dt_now = datetime.datetime.now()
         postUser = current_user.username
         postTweet = request.form.get('postTweet')
+        postTweet = postTweet.replace('?', '？')
+        postTweet = postTweet.replace('#', '＃')
         tweetHex = postTweet.encode('utf-8')
         postTweetHex = tweetHex.hex()
         replyUser = username
         replyTweet = tweet
         replyTweetHex = tweethex
+        dateY = dt_now.strftime("%Y")
+        dateM = dt_now.strftime("%m")
+        dateD = dt_now.strftime("%d")
+        timeH = dt_now.strftime("%H")
+        timeM = dt_now.strftime("%M")
 
         if img == "None":
             replyImgUrl = None
@@ -190,7 +218,8 @@ def reply(username, tweet, tweethex, img):
                 picture, Bucket, f'picture/{imgUrl}', ExtraArgs={'ContentType': iconMetaData})
 
             new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
-                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl)
+                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl,
+                            dateY=dateY, dateM=dateM, dateD=dateD, timeH=timeH, timeM=timeM)
 
             db.session.add(new_post)
             db.session.commit()
@@ -198,7 +227,8 @@ def reply(username, tweet, tweethex, img):
         else:
             imgUrl = None
             new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
-                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl)
+                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl,
+                            dateY=dateY, dateM=dateM, dateD=dateD, timeH=timeH, timeM=timeM)
 
             db.session.add(new_post)
             db.session.commit()

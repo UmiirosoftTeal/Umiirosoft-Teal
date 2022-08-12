@@ -124,7 +124,7 @@ body {
     border-radius: 42%;
     margin-left: 5px;
     margin-right: 15px;
-    box-shadow: #9c9c9c3c 0px 0.5px 1px 1px;
+    box-shadow: #9c9c9c52 0px 1px 1px 0.8px;
 }
 
 .user-name {
@@ -379,7 +379,7 @@ span {
     height: 100px;
     object-fit: cover;
     border-radius: 42%;
-    box-shadow: 0px 1px 1px 1px rgba(181, 181, 181, 0.477);
+    box-shadow: 0px 1px 1px 1px rgba(181, 181, 181, 0.338);
     margin-left: 20px;
 }
 .profileBox h2 {
@@ -462,6 +462,18 @@ span {
     margin-bottom: 10px;
 }
 .tweetBoxes {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.postData {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.td {
+    width: 100%;
+}
+.user-id, .user-time {
+    font-size: 13px;
+    color: #007070;
 }
