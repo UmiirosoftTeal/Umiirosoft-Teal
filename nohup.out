@@ -2139,3 +2139,75 @@ ok
 [pid: 51215|app: 0|req: 626/626] 150.66.98.158 () {54 vars in 1099 bytes} [Sat Aug 13 11:50:13 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
 [pid: 51215|app: 0|req: 627/627] 150.66.98.158 () {54 vars in 1097 bytes} [Sat Aug 13 11:50:13 2022] GET /static/style.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
 [pid: 51215|app: 0|req: 628/628] 150.66.98.158 () {54 vars in 1127 bytes} [Sat Aug 13 11:50:13 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+*** Starting uWSGI 2.0.20 (64bit) on [Sat Aug 13 12:46:36 2022] ***
+compiled with version: 9.4.0 on 09 August 2022 08:27:33
+os: Linux-5.15.0-43-generic #46~20.04.1-Ubuntu SMP Thu Jul 14 15:20:17 UTC 2022
+nodename: v133-18-174-93
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /root/umiirosoft-teal
+detected binary path: /usr/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 7426
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /tmp/teal.sock fd 3
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.8.10 (default, Jun 22 2022, 20:18:18)  [GCC 9.4.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x56365b3ce720
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 72904 bytes (71 KB) for 1 cores
+*** Operational MODE: single process ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x56365b3ce720 pid: 54402 (default app)
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI worker 1 (and the only) (pid: 54402, cores: 1)
+[pid: 54402|app: 0|req: 1/1] 150.66.98.158 () {52 vars in 1048 bytes} [Sat Aug 13 12:46:40 2022] GET /home => generated 32459 bytes in 56 msecs (HTTP/1.1 200) 3 headers in 96 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 2/2] 150.66.98.158 () {54 vars in 1096 bytes} [Sat Aug 13 12:46:41 2022] GET /static/style.css => generated 8233 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 7 headers in 280 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 3/3] 150.66.98.158 () {54 vars in 1077 bytes} [Sat Aug 13 12:46:42 2022] GET /static/main.js => generated 3795 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 291 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 4/4] 150.66.98.158 () {54 vars in 1098 bytes} [Sat Aug 13 12:46:42 2022] GET /static/service-worker.js => generated 249 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 301 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 5/5] 150.66.98.158 () {54 vars in 1126 bytes} [Sat Aug 13 12:46:42 2022] GET /static/images/logo.svg => generated 4734 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 7 headers in 285 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 6/6] 150.66.98.158 () {54 vars in 1487 bytes} [Sat Aug 13 12:46:48 2022] GET /home/gamma/%E3%81%82%E3%81%82%E3%81%82%E3%81%82%E3%81%82%EF%BC%81__newLine__%E5%A1%A9%E5%88%86%E3%82%92%E6%AC%B2%E3%81%97%E3%81%A6%E3%82%8B.../e38182e38182e38182e38182e38182efbc810d0ae5a1a9e58886e38292e6acb2e38197e381a6e3828b2e2e2e/None => generated 5371 bytes in 40 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 7/7] 150.66.98.158 () {54 vars in 1330 bytes} [Sat Aug 13 12:46:49 2022] GET /static/service-worker.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 8/8] 150.66.98.158 () {54 vars in 1309 bytes} [Sat Aug 13 12:46:49 2022] GET /static/main.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 180 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 9/9] 150.66.98.158 () {54 vars in 1328 bytes} [Sat Aug 13 12:46:50 2022] GET /static/style.css => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 10/10] 150.66.98.158 () {60 vars in 1364 bytes} [Sat Aug 13 12:47:39 2022] POST /home => generated 197 bytes in 14 msecs (HTTP/1.1 302) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 11/11] 150.66.98.158 () {54 vars in 1101 bytes} [Sat Aug 13 12:47:40 2022] GET /home => generated 33559 bytes in 7 msecs (HTTP/1.1 200) 3 headers in 96 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 12/12] 150.66.98.158 () {54 vars in 1096 bytes} [Sat Aug 13 12:47:41 2022] GET /static/style.css => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 13/13] 150.66.98.158 () {54 vars in 1098 bytes} [Sat Aug 13 12:47:44 2022] GET /static/service-worker.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 14/14] 150.66.98.158 () {54 vars in 1077 bytes} [Sat Aug 13 12:47:44 2022] GET /static/main.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 180 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 15/15] 150.66.98.158 () {54 vars in 1126 bytes} [Sat Aug 13 12:47:45 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 16/16] 150.66.98.158 () {54 vars in 2003 bytes} [Sat Aug 13 12:47:46 2022] GET /home/gamma/%E3%83%AA%E3%83%97%E3%83%A9%E3%82%A4(%E5%90%8D%E7%A7%B0%E5%8B%9F%E9%9B%86%E4%B8%AD)%20%E6%A9%9F%E8%83%BD%E3%81%AE%E6%94%B9%E8%A1%8C%E3%83%90%E3%82%B0%E3%82%92%E4%BF%AE%E6%AD%A3%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81__newLine__%E3%81%86%E3%81%BE%E3%81%8F%E5%8B%95%E3%81%8F%E3%81%8B%E3%81%AA...%EF%BC%9F/e383aae38397e383a9e382a428e5908de7a7b0e58b9fe99b86e4b8ad2920e6a99fe883bde381aee694b9e8a18ce38390e382b0e38292e4bfaee6ada3e38197e381bee38197e3819fefbc810d5f5f6e65774c696e655f5fe38186e381bee3818fe58b95e3818fe3818be381aa2e2e2eefbc9f/None => generated 5626 bytes in 6 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 17/17] 150.66.98.158 () {54 vars in 2003 bytes} [Sat Aug 13 12:47:47 2022] GET /home/gamma/%E3%83%AA%E3%83%97%E3%83%A9%E3%82%A4(%E5%90%8D%E7%A7%B0%E5%8B%9F%E9%9B%86%E4%B8%AD)%20%E6%A9%9F%E8%83%BD%E3%81%AE%E6%94%B9%E8%A1%8C%E3%83%90%E3%82%B0%E3%82%92%E4%BF%AE%E6%AD%A3%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81__newLine__%E3%81%86%E3%81%BE%E3%81%8F%E5%8B%95%E3%81%8F%E3%81%8B%E3%81%AA...%EF%BC%9F/e383aae38397e383a9e382a428e5908de7a7b0e58b9fe99b86e4b8ad2920e6a99fe883bde381aee694b9e8a18ce38390e382b0e38292e4bfaee6ada3e38197e381bee38197e3819fefbc810d5f5f6e65774c696e655f5fe38186e381bee3818fe58b95e3818fe3818be381aa2e2e2eefbc9f/None => generated 5626 bytes in 7 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 18/18] 150.66.98.158 () {54 vars in 1644 bytes} [Sat Aug 13 12:47:50 2022] GET /static/style.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 19/19] 150.66.98.158 () {54 vars in 1646 bytes} [Sat Aug 13 12:48:19 2022] GET /static/service-worker.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 20/20] 150.66.98.158 () {54 vars in 1674 bytes} [Sat Aug 13 12:48:22 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 21/21] 150.66.98.158 () {54 vars in 1625 bytes} [Sat Aug 13 12:48:22 2022] GET /static/main.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 180 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 22/22] 150.66.98.158 () {60 vars in 2816 bytes} [Sat Aug 13 12:48:35 2022] POST /home/gamma/%E3%83%AA%E3%83%97%E3%83%A9%E3%82%A4(%E5%90%8D%E7%A7%B0%E5%8B%9F%E9%9B%86%E4%B8%AD)%20%E6%A9%9F%E8%83%BD%E3%81%AE%E6%94%B9%E8%A1%8C%E3%83%90%E3%82%B0%E3%82%92%E4%BF%AE%E6%AD%A3%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81__newLine__%E3%81%86%E3%81%BE%E3%81%8F%E5%8B%95%E3%81%8F%E3%81%8B%E3%81%AA...%EF%BC%9F/e383aae38397e383a9e382a428e5908de7a7b0e58b9fe99b86e4b8ad2920e6a99fe883bde381aee694b9e8a18ce38390e382b0e38292e4bfaee6ada3e38197e381bee38197e3819fefbc810d5f5f6e65774c696e655f5fe38186e381bee3818fe58b95e3818fe3818be381aa2e2e2eefbc9f/None => generated 1099 bytes in 11 msecs (HTTP/1.1 302) 4 headers in 663 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 23/23] 150.66.98.158 () {54 vars in 2551 bytes} [Sat Aug 13 12:48:35 2022] GET /home/gamma/%E3%83%AA%E3%83%97%E3%83%A9%E3%82%A4(%E5%90%8D%E7%A7%B0%E5%8B%9F%E9%9B%86%E4%B8%AD)%20%E6%A9%9F%E8%83%BD%E3%81%AE%E6%94%B9%E8%A1%8C%E3%83%90%E3%82%B0%E3%82%92%E4%BF%AE%E6%AD%A3%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81__newLine__%E3%81%86%E3%81%BE%E3%81%8F%E5%8B%95%E3%81%8F%E3%81%8B%E3%81%AA...%EF%BC%9F/e383aae38397e383a9e382a428e5908de7a7b0e58b9fe99b86e4b8ad2920e6a99fe883bde381aee694b9e8a18ce38390e382b0e38292e4bfaee6ada3e38197e381bee38197e3819fefbc810d5f5f6e65774c696e655f5fe38186e381bee3818fe58b95e3818fe3818be381aa2e2e2eefbc9f/None => generated 6173 bytes in 6 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 24/24] 150.66.98.158 () {54 vars in 1644 bytes} [Sat Aug 13 12:48:36 2022] GET /static/style.css => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 25/25] 150.66.98.158 () {54 vars in 1646 bytes} [Sat Aug 13 12:48:36 2022] GET /static/service-worker.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 26/26] 150.66.98.158 () {54 vars in 1625 bytes} [Sat Aug 13 12:48:36 2022] GET /static/main.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 180 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 27/27] 150.66.98.158 () {54 vars in 1674 bytes} [Sat Aug 13 12:48:36 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 28/28] 150.66.98.158 () {54 vars in 2551 bytes} [Sat Aug 13 12:48:40 2022] GET /home/gamma/%E3%83%AA%E3%83%97%E3%83%A9%E3%82%A4(%E5%90%8D%E7%A7%B0%E5%8B%9F%E9%9B%86%E4%B8%AD)%20%E6%A9%9F%E8%83%BD%E3%81%AE%E6%94%B9%E8%A1%8C%E3%83%90%E3%82%B0%E3%82%92%E4%BF%AE%E6%AD%A3%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81__newLine__%E3%81%86%E3%81%BE%E3%81%8F%E5%8B%95%E3%81%8F%E3%81%8B%E3%81%AA...%EF%BC%9F/e383aae38397e383a9e382a428e5908de7a7b0e58b9fe99b86e4b8ad2920e6a99fe883bde381aee694b9e8a18ce38390e382b0e38292e4bfaee6ada3e38197e381bee38197e3819fefbc810d5f5f6e65774c696e655f5fe38186e381bee3818fe58b95e3818fe3818be381aa2e2e2eefbc9f/None => generated 6173 bytes in 9 msecs (HTTP/1.1 200) 3 headers in 95 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 29/29] 150.66.98.158 () {54 vars in 1644 bytes} [Sat Aug 13 12:48:40 2022] GET /static/style.css => generated 0 bytes in 3 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 30/30] 150.66.98.158 () {54 vars in 1646 bytes} [Sat Aug 13 12:48:40 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 31/31] 150.66.98.158 () {54 vars in 1625 bytes} [Sat Aug 13 12:48:40 2022] GET /static/main.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 180 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 32/32] 150.66.98.158 () {54 vars in 1674 bytes} [Sat Aug 13 12:48:40 2022] GET /static/images/logo.svg => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 33/33] 150.66.98.158 () {54 vars in 1649 bytes} [Sat Aug 13 12:48:42 2022] GET /home => generated 35424 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 96 bytes (1 switches on core 0)
+[pid: 54402|app: 0|req: 34/34] 150.66.98.158 () {54 vars in 1096 bytes} [Sat Aug 13 12:48:42 2022] GET /static/style.css => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 35/35] 150.66.98.158 () {54 vars in 1098 bytes} [Sat Aug 13 12:48:42 2022] GET /static/service-worker.js => generated 0 bytes in 1 msecs (HTTP/1.1 304) 4 headers in 191 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 36/36] 150.66.98.158 () {54 vars in 1126 bytes} [Sat Aug 13 12:48:43 2022] GET /static/images/logo.svg => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 183 bytes (0 switches on core 0)
+[pid: 54402|app: 0|req: 37/37] 150.66.98.158 () {54 vars in 1077 bytes} [Sat Aug 13 12:48:43 2022] GET /static/main.js => generated 0 bytes in 2 msecs (HTTP/1.1 304) 4 headers in 180 bytes (0 switches on core 0)
