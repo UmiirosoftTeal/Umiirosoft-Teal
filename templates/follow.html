@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="page-content">
+    {% for follow in follow %}
+    <div class="tweet-item shadow">
+        <a href="/home/profile/{{ follow.followUser }}">
+            <div>
+                <img class="user-icon" style="vertical-align:middle"
+                    src="https://object.gamma410.win/teal/users/{{ follow.followUser }}.jpg">
+                <span style="vertical-align:middle; font-size:15pt">{{ follow.followUser }}</span>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<style>
+    .tweet-item {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+</style>
+{% endblock %}

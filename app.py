@@ -60,6 +60,12 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(25), nullable=False)
 
 
+class Follow(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(20), nullable=False)
+    followUser = db.Column(db.String(20), nullable=False)
+
+
 # S3 の設定
 s3 = boto3.client('s3',
                   endpoint_url='https://object.gamma410.win',
@@ -80,8 +86,9 @@ def redirect_func():
 @login_required  # ログインチェック
 def home():
     if request.method == 'GET':
+        pwd = "見つける"
         tweets = Post.query.order_by(Post.id.desc()).all()
-        return render_template('index.html', tweets=tweets)
+        return render_template('index.html', tweets=tweets, pwd=pwd)
 
     else:
         dt_now = datetime.datetime.now()
@@ -102,7 +109,6 @@ def home():
         dateD = dt_now.strftime("%d")
         timeH = dt_now.strftime("%H")
         timeM = dt_now.strftime("%M")
-
 
         if picture:
 
@@ -140,11 +146,18 @@ def profile(username):
     post = Post.query.filter_by(
         postUser=username).order_by(Post.id.desc()).all()
     count = Post.query.filter_by(postUser=username).count()
+    follow = Follow.query.filter_by(user=username).count()
+    follower = Follow.query.filter_by(followUser=username).count()
     user = User.query.filter_by(username=username).first()
-    return render_template("profile.html", username=username, post=post, user=user, count=count)
+    followNow = Follow.query.filter_by(user=current_user.username).first()
+
+    pwd = "プロフィール"
+    return render_template("profile.html", username=username, post=post, user=user, count=count, follow=follow, followNow=followNow, follower=follower, pwd=pwd)
+
 
 @app.route('/home/profile/edit_profile/<string:username>', methods=['GET', 'POST'])
 def editProfile(username):
+    pwd = "プロフィール編集"
     if request.method == "POST":
         try:
             usericon = request.files['userIcon']
@@ -175,11 +188,12 @@ def editProfile(username):
             return redirect(f'/home/profile/{ username }')
 
     else:
-        return render_template('editprof.html')
+        return render_template('editprof.html', pwd=pwd)
 
 
 @app.route('/home/<string:username>/<string:tweet>/<string:tweethex>/<string:img>', methods=['GET', 'POST'])
 def reply(username, tweet, tweethex, img):
+    pwd = "投稿"
     if request.method == 'POST':
         dt_now = datetime.datetime.now()
         postUser = current_user.username
@@ -243,11 +257,39 @@ def reply(username, tweet, tweethex, img):
             postUser=username, postTweetHex=tweethex).first()
         reply = Post.query.filter_by(
             replyUser=username, replyTweetHex=tweethex).order_by(Post.id.desc()).all()
-        return render_template('reply.html', post=post, reply=reply)
+        return render_template('reply.html', post=post, reply=reply, pwd=pwd)
+
+
+@app.route('/follow/list/<string:username>')
+def follow(username):
+    pwd = "フォロー中"
+    user = username
+    follow = Follow.query.filter_by(user=current_user.username).all()
+    return render_template('follow.html', user=user, follow=follow, pwd=pwd)
+
+
+@app.route('/follower/list/<string:username>')
+def follower(username):
+    pwd = "フォロワー"
+    user = username
+    follow = Follow.query.filter_by(followUser=current_user.username).all()
+    return render_template('follower.html', user=user, follow=follow, pwd=pwd)
+
+
+@app.route('/follow/add/<string:following>', methods=['GET', 'POST'])
+def following(following):
+    user = current_user.username
+    followUser = following
+
+    new_post = Follow(user=user, followUser=followUser)
+    db.session.add(new_post)
+    db.session.commit()
+
+    flash("フォローしました！")
+    return redirect(f'/home/profile/{ current_user.username }')
 
 
 # ログイン前系統
-
 @app.route('/about')
 def about():
     return render_template('about.html')

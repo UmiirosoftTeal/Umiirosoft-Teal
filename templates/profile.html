@@ -2,6 +2,7 @@
 
 {% block body %}
 <div class="page-content">
+
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for msg in messages %}
@@ -11,6 +12,7 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
+
     <div class="profileBox">
         <div class="itemBox">
             <table>
@@ -19,14 +21,10 @@
                 </td>
                 <td>
                     <h2>{{ username }}</h2>
-                    {% if username == "gamma" %}
-                    <p># Teal運営</p>
-                    {% elif username == "Teal 公式" %}
-                    <p># Teal運営</p>
-                    {% endif %}
                     <h6>{{ user.userdetail | replace('\n', '<br>') | safe }}</h6>
                 </td>
             </table>
+
             {% if username == current_user.username %}
             <table>
                 <td>
@@ -36,8 +34,38 @@
                 </td>
             </table>
             {% else %}
+            {% if username in followNow.followUser %}
+            <p>フォロー済み</p>
+            {% else %}
+            <a href="/follow/add/{{ username }}">
+                <p>フォローする</p>
+            </a>
+            {% endif %}
+
             {% endif %}
         </div>
+        {% if username == current_user.username %}
+        <div class="itemBox boxas">
+            <p style="font-size:17px;letter-spacing:1.5px;">STATUS</p>
+            <br>
+            <div class="flex-prof">
+                <p style="font-size:10px;letter-spacing:1.5px;font-weight:bold;">投稿</p>
+                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ count }} 件</p>
+            </div>
+            <a href="/follow/list/{{ current_user.username }}">
+                <div class="flex-prof">
+                    <p style="font-size:10px;letter-spacing:1.5px;font-weight:bold;">フォロー</p>
+                    <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ follow }} 人</p>
+                </div>
+            </a>
+            <a href="/follower/list/{{ current_user.username }}">
+                <div class="flex-prof">
+                    <p style="font-size:10px;letter-spacing:1.5px;font-weight:bold;">フォロワー</p>
+                    <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ follower }} 人</p>
+                </div>
+            </a>
+        </div>
+        {% else %}
         <div class="itemBox boxas">
             <p style="font-size:17px;letter-spacing:1.5px;">STATUS</p>
             <br>
@@ -47,13 +75,14 @@
             </div>
             <div class="flex-prof">
                 <p style="font-size:10px;letter-spacing:1.5px;">フォロー</p>
-                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">0 人</p>
+                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ follow }} 人</p>
             </div>
             <div class="flex-prof">
                 <p style="font-size:10px;letter-spacing:1.5px;">フォロワー</p>
-                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">0 人</p>
+                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ follower }} 人</p>
             </div>
         </div>
+        {% endif %}
     </div>
     {% for post in post %}
     <div class="tweet-item tweet-items shadow">
@@ -68,7 +97,8 @@
                 <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{post.imgUrl}}">
                 {% endif %}
                 <div class="postData">
-                    <p class="user-time">{{ post.timeH }}:{{ post.timeM }}・{{ post.dateY }}年{{ post.dateM }}月{{ post.dateD }}日</p>
+                    <p class="user-time">{{ post.timeH }}:{{ post.timeM }}・{{ post.dateY }}年{{ post.dateM }}月{{
+                        post.dateD }}日</p>
                 </div>
             </td>
         </table>
@@ -79,6 +109,10 @@
     .tweet-items {
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+
+    a {
+        text-decoration: none;
     }
 </style>
 {% endblock %}
