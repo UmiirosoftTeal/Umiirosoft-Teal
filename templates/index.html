@@ -41,7 +41,7 @@
                         <p class="user-name">{{ tweet.postUser }}</p>
                         <p>{{ tweet.timeH }}:{{ tweet.timeM }}</p>
                     </div>
-                    <p>{{ tweet.postTweet | replace('\n', '<br>') | safe}}</p>
+                    <p>{{ tweet.postTweet | replace('__newLine__', '<br>') | safe}}</p>
                     {% if tweet.imgUrl != None %}
                     <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{tweet.imgUrl}}">
                     {% endif %}
@@ -63,7 +63,7 @@
                         <div class="postData">
                             <p class="user-name">{{ tweet.replyUser }}</p>
                         </div>
-                        <p>{{ tweet.replyTweet | replace('\n', '<br>') | safe}}</p>
+                        <p>{{ tweet.replyTweet | replace('__newLine__', '<br>') | safe}}</p>
                         {% if tweet.replyImgUrl != None %}
                         <img class="tweet-item-img"
                             src="https://object.gamma410.win/teal/picture/{{ tweet.replyImgUrl }}">

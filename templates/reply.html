@@ -39,7 +39,7 @@
                         <div class="postData">
                             <p class="user-name">{{ post.replyUser }}</p>
                         </div>
-                        <p>{{ post.replyTweet | replace('\n', '<br>') | safe}}</p>
+                        <p>{{ post.replyTweet | replace('__newLine__', '<br>') | safe}}</p>
                         {% if post.replyImgUrl != None %}
                         <img class="tweet-item-img"
                             src="https://object.gamma410.win/teal/picture/{{ post.replyImgUrl }}">
@@ -88,7 +88,7 @@
                     <p class="user-name">{{ reply.postUser }}</p>
                     <p>{{ reply.timeH }}:{{ reply.timeM }}</p>
                 </div>
-                <p>{{ reply.postTweet | replace('\n', '<br>') | safe}}</p>
+                <p>{{ reply.postTweet | replace('__newLine__', '<br>') | safe}}</p>
                 {% if reply.imgUrl != None %}
                 <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{reply.imgUrl}}">
                 {% endif %}

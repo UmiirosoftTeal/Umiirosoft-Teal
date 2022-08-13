@@ -63,7 +63,7 @@
             </td>
             <td class="td">
                 <p class="user-name">{{ post.postUser }}</p>
-                <p>{{ post.postTweet | replace('\n', '<br>') | safe}}</p>
+                <p>{{ post.postTweet | replace('__newLine__', '<br>') | safe}}</p>
                 {% if post.imgUrl != None %}
                 <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{post.imgUrl}}">
                 {% endif %}

@@ -90,6 +90,7 @@ def home():
         picture = request.files['imgUrl']
         postTweet = postTweet.replace('?', '？')
         postTweet = postTweet.replace('#', '＃')
+        postTweet = postTweet.replace('\n', '__newLine__')
         tweetHex = postTweet.encode('utf-8')
         postTweetHex = tweetHex.hex()
         replyUser = None
@@ -185,9 +186,11 @@ def reply(username, tweet, tweethex, img):
         postTweet = request.form.get('postTweet')
         postTweet = postTweet.replace('?', '？')
         postTweet = postTweet.replace('#', '＃')
+        postTweet = postTweet.replace('\n', '__newLine__')
         tweetHex = postTweet.encode('utf-8')
         postTweetHex = tweetHex.hex()
         replyUser = username
+        tweet = tweet.replace('__newLine___', '\n')
         replyTweet = tweet
         replyTweetHex = tweethex
         dateY = dt_now.strftime("%Y")
