@@ -65,10 +65,15 @@ class Follow(db.Model):
     user = db.Column(db.String(20), nullable=False)
     followUser = db.Column(db.String(20), nullable=False)
 
+class FollowMe(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(20), nullable=False)
+    followUser = db.Column(db.String(20), nullable=False)
+
 
 # S3 の設定
 s3 = boto3.client('s3',
-                  endpoint_url='https://object.gamma410.win',
+                  endpoint_url='https://object.gamma410.win:9000',
                   aws_access_key_id='minioadmin',
                   aws_secret_access_key='minioadmin'
                   )
@@ -149,10 +154,10 @@ def profile(username):
     follow = Follow.query.filter_by(user=username).count()
     follower = Follow.query.filter_by(followUser=username).count()
     user = User.query.filter_by(username=username).first()
-    followNow = Follow.query.filter_by(user=current_user.username).first()
-
+    followYou = Follow.query.filter_by(user=current_user.username).all()
+    
     pwd = "プロフィール"
-    return render_template("profile.html", username=username, post=post, user=user, count=count, follow=follow, followNow=followNow, follower=follower, pwd=pwd)
+    return render_template("profile.html", username=username, post=post, user=user, count=count, follow=follow, follower=follower, followYou=followYou, pwd=pwd)
 
 
 @app.route('/home/profile/edit_profile/<string:username>', methods=['GET', 'POST'])
@@ -272,7 +277,7 @@ def follow(username):
 def follower(username):
     pwd = "フォロワー"
     user = username
-    follow = Follow.query.filter_by(followUser=current_user.username).all()
+    follow = FollowMe.query.filter_by(user=current_user.username).all()
     return render_template('follower.html', user=user, follow=follow, pwd=pwd)
 
 
@@ -280,10 +285,14 @@ def follower(username):
 def following(following):
     user = current_user.username
     followUser = following
-
+    
     new_post = Follow(user=user, followUser=followUser)
+    new_post2 = FollowMe(user=followUser, followUser=user)
+
     db.session.add(new_post)
+    db.session.add(new_post2)
     db.session.commit()
+
 
     flash("フォローしました！")
     return redirect(f'/home/profile/{ current_user.username }')
