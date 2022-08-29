@@ -7,7 +7,7 @@
         <table>
             <td>
                 <a href="/home/profile/{{ post.postUser }}">
-                    <img class="user-icon" src="https://object.gamma410.win:9000/teal/users/{{ post.postUser }}.jpg">
+                    <img class="user-icon" src="https://object.gamma410.win/teal/users/{{ post.postUser }}.jpg">
                 </a>
             </td>
             <td class="td">
@@ -16,7 +16,7 @@
                 </div>
                 <p class="tweet-rp">{{ post.postTweet | replace('__newLine__', '<br>') | safe}}</p>
                 {% if post.imgUrl != None %}
-                <img class="tweet-item-img" src="https://object.gamma410.win:9000/teal/picture/{{ post.imgUrl }}">
+                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{ post.imgUrl }}">
                 {% endif %}
                 <div class="postData">
                     <p class="user-id">@{{ post.postUser }}.teal</p>
@@ -26,13 +26,13 @@
         </table>
         {% if post.replyTweet != None %}
         <a
-            href="/home/{{ post.replyUser }}/{{ post.replyTweet }}/{{ post.replyTweetHex }}/{{ post.replyUrl | replace(Null, 'None') }}">
+            href="/home/{{ post.replyUser }}/{{ post.replyTweetHex }}/{{ post.replyUrl | replace(Null, 'None') }}">
             <div class="replyTweet">
                 <table>
                     <td>
                         <a href="/home/profile/{{ post.replyUser }}">
                             <img class="user-icon"
-                                src="https://object.gamma410.win:9000/teal/users/{{ post.replyUser }}.jpg">
+                                src="https://object.gamma410.win/teal/users/{{ post.replyUser }}.jpg">
                         </a>
                     </td>
                     <td class="td">
@@ -42,7 +42,7 @@
                         <p>{{ post.replyTweet | replace('__newLine__', '<br>') | safe}}</p>
                         {% if post.replyImgUrl != None %}
                         <img class="tweet-item-img"
-                            src="https://object.gamma410.win:9000/teal/picture/{{ post.replyImgUrl }}">
+                            src="https://object.gamma410.win/teal/picture/{{ post.replyImgUrl }}">
                         {% endif %}
                     </td>
                 </table>
@@ -51,7 +51,7 @@
         {% endif %}
     </div>
     <div class="tweet-item tools shadow">
-        <form id="Box" action="/home/{{ post.postUser }}/{{ post.postTweet }}/{{ post.postTweetHex }}/{{ post.imgUrl }}"
+        <form id="Box" action="/home/{{ post.postUser }}/{{ post.postTweetHex }}/{{ post.imgUrl }}"
             method="POST" enctype="multipart/form-data">
             <p id="textCount"></p>
             <div class="mdl-textfield mdl-js-textfield">
@@ -80,7 +80,7 @@
         <table>
             <td>
                 <a href="/home/profile/{{ reply.postUser }}">
-                    <img class="user-icon" src="https://object.gamma410.win:9000/teal/users/{{reply.postUser}}.jpg">
+                    <img class="user-icon" src="https://object.gamma410.win/teal/users/{{reply.postUser}}.jpg">
                 </a>
             </td>
             <td class="td">
@@ -90,7 +90,7 @@
                 </div>
                 <p>{{ reply.postTweet | replace('__newLine__', '<br>') | safe}}</p>
                 {% if reply.imgUrl != None %}
-                <img class="tweet-item-img" src="https://object.gamma410.win:9000/teal/picture/{{reply.imgUrl}}">
+                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{reply.imgUrl}}">
                 {% endif %}
             </td>
         </table>

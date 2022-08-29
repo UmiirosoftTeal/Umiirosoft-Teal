@@ -73,7 +73,7 @@ class FollowMe(db.Model):
 
 # S3 の設定
 s3 = boto3.client('s3',
-                  endpoint_url='https://object.gamma410.win:9000',
+                  endpoint_url='https://object.gamma410.win',
                   aws_access_key_id='minioadmin',
                   aws_secret_access_key='minioadmin'
                   )
@@ -196,8 +196,8 @@ def editProfile(username):
         return render_template('editprof.html', pwd=pwd)
 
 
-@app.route('/home/<string:username>/<string:tweet>/<string:tweethex>/<string:img>', methods=['GET', 'POST'])
-def reply(username, tweet, tweethex, img):
+@app.route('/home/<string:username>/<string:tweethex>/<string:img>', methods=['GET', 'POST'])
+def reply(username, tweethex, img):
     pwd = "投稿"
     if request.method == 'POST':
         dt_now = datetime.datetime.now()
@@ -209,7 +209,11 @@ def reply(username, tweet, tweethex, img):
         tweetHex = postTweet.encode('utf-8')
         postTweetHex = tweetHex.hex()
         replyUser = username
+
+        tweet = bytes.fromhex(tweethex).decode("utf-8")
+
         tweet = tweet.replace('__newLine___', '\n')
+
         replyTweet = tweet
         replyTweetHex = tweethex
         dateY = dt_now.strftime("%Y")
@@ -255,7 +259,7 @@ def reply(username, tweet, tweethex, img):
             db.session.add(new_post)
             db.session.commit()
 
-        return redirect(f'/home/{ username }/{ tweet }/{ tweethex }/{ img }')
+        return redirect(f'/home/{ username }/{ tweethex }/{ img }')
 
     else:
         post = Post.query.filter_by(

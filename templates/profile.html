@@ -17,7 +17,7 @@
         <div class="itemBox">
             <table>
                 <td>
-                    <img class="userIcons" src="https://object.gamma410.win:9000/teal/users/{{ username }}.jpg">
+                    <img class="userIcons" src="https://object.gamma410.win/teal/users/{{ username }}.jpg">
                 </td>
                 <td>
                     <h2>{{ username }}</h2>
@@ -81,13 +81,13 @@
     <div class="tweet-item tweet-items shadow">
         <table>
             <td>
-                <img class="user-icon" src="https://object.gamma410.win:9000/teal/users/{{post.postUser}}.jpg">
+                <img class="user-icon" src="https://object.gamma410.win/teal/users/{{post.postUser}}.jpg">
             </td>
             <td class="td">
                 <p class="user-name">{{ post.postUser }}</p>
                 <p>{{ post.postTweet | replace('__newLine__', '<br>') | safe}}</p>
                 {% if post.imgUrl != None %}
-                <img class="tweet-item-img" src="https://object.gamma410.win:9000/teal/picture/{{post.imgUrl}}">
+                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{post.imgUrl}}">
                 {% endif %}
                 <div class="postData">
                     <p class="user-time">{{ post.timeH }}:{{ post.timeM }}・{{ post.dateY }}年{{ post.dateM }}月{{
