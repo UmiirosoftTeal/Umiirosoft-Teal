@@ -1,4 +1,4 @@
-#!/root/Umiirosoft-Teal/venv/bin/python3
+#!/Users/moka6652/PycharmProjects/Umiirosoft-Teal/venv/bin/python3
 
 import sys
 import json
