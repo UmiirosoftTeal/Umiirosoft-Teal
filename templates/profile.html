@@ -37,45 +37,16 @@
 
             {% endif %}
         </div>
-        {% if username == current_user.username %}
+
         <div class="itemBox boxas">
             <p style="font-size:17px;letter-spacing:1.5px;">STATUS</p>
             <br>
             <div class="flex-prof">
-                <p style="font-size:10px;letter-spacing:1.5px;font-weight:bold;">投稿</p>
+                <p style="font-size:10px;letter-spacing:1.5px;font-weight:bold;">今日の投稿</p>
                 <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ count }} 件</p>
             </div>
-            <a href="/follow/list/{{ current_user.username }}">
-                <div class="flex-prof">
-                    <p style="font-size:10px;letter-spacing:1.5px;font-weight:bold;">フォロー</p>
-                    <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ follow }} 人</p>
-                </div>
-            </a>
-            <a href="/follower/list/{{ current_user.username }}">
-                <div class="flex-prof">
-                    <p style="font-size:10px;letter-spacing:1.5px;font-weight:bold;">フォロワー</p>
-                    <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ follower }} 人</p>
-                </div>
-            </a>
         </div>
-        {% else %}
-        <div class="itemBox boxas">
-            <p style="font-size:17px;letter-spacing:1.5px;">STATUS</p>
-            <br>
-            <div class="flex-prof">
-                <p style="font-size:10px;letter-spacing:1.5px;">投稿</p>
-                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ count }} 件</p>
-            </div>
-            <div class="flex-prof">
-                <p style="font-size:10px;letter-spacing:1.5px;">フォロー</p>
-                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ follow }} 人</p>
-            </div>
-            <div class="flex-prof">
-                <p style="font-size:10px;letter-spacing:1.5px;">フォロワー</p>
-                <p style="font-size:10px;letter-spacing:1.5px;word-break:break-all;">{{ follower }} 人</p>
-            </div>
-        </div>
-        {% endif %}
+
     </div>
     {% for post in post %}
     <div class="tweet-item tweet-items shadow">

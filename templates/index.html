@@ -9,7 +9,7 @@
             <div class="mdl-textfield mdl-js-textfield">
                 <textarea name="postTweet" class="mdl-textfield__input" rows="3" type="text"
                     onkeyup="ShowLength(value)"></textarea>
-                <label class="mdl-textfield__label" for="sample5">いま何してる？</label>
+                <label class="mdl-textfield__label" for="sample5">無理しないでね。</label>
             </div>
             <div class="btn-cover">
                 <label for="file_upload">
@@ -20,7 +20,7 @@
 
                 <button onclick="onButton()" id="tweetPush" type="submit"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                    投稿
+                    おくる
                 </button>
             </div>
             <div id="preview"></div>
@@ -81,29 +81,44 @@
         <i class="material-icons">add</i>
     </button>
 
+
     <dialog class="mdl-dialog">
         <form id="mbBox" action="/home" method="POST" enctype="multipart/form-data">
             <p id="textCount-mb"></p>
             <div class="mdl-textfield mdl-js-textfield">
                 <textarea name="postTweet" class="mdl-textfield__input" type="text" rows="5"
                     onkeyup="ShowLengthMB(value)"></textarea>
-                <label class="mdl-textfield__label" for="sample5">いま何してる？</label>
+                <label class="mdl-textfield__label" for="sample5">無理しないでね。</label>
             </div>
             <div class="btn-cover">
-                <label for="file_uploads">
-                    <span class="material-symbols-rounded">imagesmode</span>
-                    <input type="file" id="file_uploads" accept="image/jpeg" style="display:none;"
-                        onchange="imgPreViewMB(event)" name="imgUrl">
-                </label>
+                <div>
+                    <label for="file_uploads">
+                        <span class="material-symbols-rounded">imagesmode</span>
+                        <input type="file" id="file_uploads" accept="image/jpeg" style="display:none;"
+                            onchange="imgPreViewMB(event)" name="imgUrl">
+                    </label>
+                </div>
 
-                <button onclick="onButtonMB()" id="tweetPush-mb" type="submit"
-                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                    投稿
-                </button>
+                <div>
+                    <table>
+                        <td>
+                            <button type="button" class="mdl-button mdl-js-button mdl-button--raised close">
+                                とじる
+                            </button>
+                        </td>
+                        <td>
+                            <button onclick="onButtonMB()" id="tweetPush-mb" type="submit"
+                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                おくる
+                            </button>
+                        </td>
+                    </table>
+                </div>  
             </div>
             <div id="preview-mb"></div>
         </form>
     </dialog>
+
 
 </div>
 

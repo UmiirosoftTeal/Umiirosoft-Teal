@@ -8,6 +8,8 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 import boto3
 import datetime
+from apscheduler.schedulers.background import BackgroundScheduler
+import time
 
 
 app = Flask(__name__)
@@ -60,17 +62,6 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(25), nullable=False)
 
 
-class Follow(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String(20), nullable=False)
-    followUser = db.Column(db.String(20), nullable=False)
-
-class FollowMe(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String(20), nullable=False)
-    followUser = db.Column(db.String(20), nullable=False)
-
-
 # S3 の設定
 s3 = boto3.client('s3',
                   endpoint_url='https://object.gamma410.win',
@@ -91,7 +82,7 @@ def redirect_func():
 @login_required  # ログインチェック
 def home():
     if request.method == 'GET':
-        pwd = "見つける"
+        pwd = "みつける"
         tweets = Post.query.order_by(Post.id.desc()).all()
         return render_template('index.html', tweets=tweets, pwd=pwd)
 
@@ -151,13 +142,10 @@ def profile(username):
     post = Post.query.filter_by(
         postUser=username).order_by(Post.id.desc()).all()
     count = Post.query.filter_by(postUser=username).count()
-    follow = Follow.query.filter_by(user=username).count()
-    follower = Follow.query.filter_by(followUser=username).count()
     user = User.query.filter_by(username=username).first()
-    followYou = Follow.query.filter_by(user=current_user.username).all()
-    
+
     pwd = "プロフィール"
-    return render_template("profile.html", username=username, post=post, user=user, count=count, follow=follow, follower=follower, followYou=followYou, pwd=pwd)
+    return render_template("profile.html", username=username, post=post, user=user, count=count, pwd=pwd)
 
 
 @app.route('/home/profile/edit_profile/<string:username>', methods=['GET', 'POST'])
@@ -269,39 +257,6 @@ def reply(username, tweethex, img):
         return render_template('reply.html', post=post, reply=reply, pwd=pwd)
 
 
-@app.route('/follow/list/<string:username>')
-def follow(username):
-    pwd = "フォロー中"
-    user = username
-    follow = Follow.query.filter_by(user=current_user.username).all()
-    return render_template('follow.html', user=user, follow=follow, pwd=pwd)
-
-
-@app.route('/follower/list/<string:username>')
-def follower(username):
-    pwd = "フォロワー"
-    user = username
-    follow = FollowMe.query.filter_by(user=current_user.username).all()
-    return render_template('follower.html', user=user, follow=follow, pwd=pwd)
-
-
-@app.route('/follow/add/<string:following>', methods=['GET', 'POST'])
-def following(following):
-    user = current_user.username
-    followUser = following
-    
-    new_post = Follow(user=user, followUser=followUser)
-    new_post2 = FollowMe(user=followUser, followUser=user)
-
-    db.session.add(new_post)
-    db.session.add(new_post2)
-    db.session.commit()
-
-
-    flash("フォローしました！")
-    return redirect(f'/home/profile/{ current_user.username }')
-
-
 # ログイン前系統
 @app.route('/about')
 def about():
@@ -328,9 +283,20 @@ def signin():
 
         # Userテーブルからusernameに一致するユーザを取得
         user = User.query.filter_by(useremail=useremail).first()
+
+        if user:
+            print("ok")
+        else:
+            flash("メールアドレスまたはパスワードが間違っています。<br>ご確認の上もう一度お試しください。")
+            return redirect('/signin')
+
         if check_password_hash(user.password, password):
-            login_user(user)
-            return redirect('/home')
+            try:
+                login_user(user)
+                return redirect('/home')
+            except:
+                flash("メールアドレスまたはパスワードが間違っています。<br>ご確認の上もう一度お試しください。")
+                return redirect('/signin')
 
         else:
             flash("メールアドレスまたはパスワードが間違っています。<br>ご確認の上もう一度お試しください。")
@@ -401,19 +367,58 @@ def signup():
         return render_template('signup.html')
 
 
+@app.route('/dev')
+@login_required 
+def dev():
+    if current_user.username == "gamma":
+        posts = Post.query.order_by(Post.id.desc()).all()
+        users = User.query.order_by(User.id.desc()).all()
+        return render_template("dev.html", posts=posts, users=users)
+    else:
+        return "404"
+
+
+@app.route('/dev/deleteTweet/<int:n>')
+@login_required 
+def devTweetDelete(n):
+    post = Post.query.filter_by(id=n).first()
+    db.session.delete(post)
+    db.session.commit()
+    return redirect('/dev')
+
+
+@app.route('/dev/deleteUser/<int:n>')
+@login_required 
+def devUserDelete(n):
+    user = User.query.filter_by(id=n).first()
+    db.session.delete(user)
+    db.session.commit()
+    return redirect('/dev')
+
+
 @app.route('/logout')
 @login_required  # ログインチェック
 def logout():
     logout_user()
     return redirect('/about')
 
+
 # ログイン前はリダイレクト
-
-
 @login_manager.unauthorized_handler
 def unauthorized():
     return redirect('/about')
 
 
+# 定時実行
+def job():
+    db.session.query(Post).delete()
+    db.session.commit()
+
+sched = BackgroundScheduler(daemon=True)
+sched.add_job(job, 'cron',  hour=0, minute=0) 
+sched.start()
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=80)
+

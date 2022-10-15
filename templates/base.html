@@ -33,11 +33,14 @@
                     src="{{ url_for('static', filename='images/logo.svg') }}"></span>
             <nav class="mdl-navigation">
                 {% if current_user.is_anonymous %}
-                <a class="mdl-navigation__link" href="/about">Welcome!</a>
+                <a class="mdl-navigation__link" href="/about">ようこそ</a>
                 {% else %}
-                <a class="mdl-navigation__link" href="/home">見つける</a>
+                <a class="mdl-navigation__link" href="/home">みつける</a>
                 <a class="mdl-navigation__link" href="/home/profile/{{ current_user.username }}">プロフィール</a>
                 <a class="mdl-navigation__link" href="/logout">ログアウト</a>
+                {% endif %}
+                {% if current_user.username == "gamma" %}
+                <a class="mdl-navigation__link" href="/dev">Teal 情報管理システム</a>
                 {% endif %}
             </nav>
         </div>

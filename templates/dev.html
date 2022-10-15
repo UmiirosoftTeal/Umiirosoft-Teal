@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="page-content">
+    <h4>Teal 情報管理システム</h4>
+</div>
+
+<div class="page-content">
+    <h6>投稿データ</h6>
+</div>
+
+<div class="scroll-table">
+    <table class="mdl-data-table">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">投稿者</th>
+                <th class="mdl-data-table__cell--non-numeric">投稿内容</th>
+                <th class="mdl-data-table__cell--non-numeric">引用元</th>
+                <th class="mdl-data-table__cell--non-numeric">引用元の投稿内容</th>
+                <th class="mdl-data-table__cell--non-numeric">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{ post.postUser }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ post.postTweet | replace('__newLine__', '<br>') | safe
+                    }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ post.replyUser }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ post.replyTweet | replace('__newLine__', '<br>') | safe
+                    }}</td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    <a href="/dev/deleteTweet/{{ post.id }}">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+<div class="page-content">
+    <h6>登録アカウント</h6>
+</div>
+
+<div class="scroll-table">
+    <table class="mdl-data-table">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">アイコン</th>
+                <th class="mdl-data-table__cell--non-numeric">ユーザー名</th>
+                <th class="mdl-data-table__cell--non-numeric">メールアドレス</th>
+                <th class="mdl-data-table__cell--non-numeric">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                    <img width="60px" style="border-radius:50%;border: solid 1px #d3d3d3;"
+                        src="https://object.gamma410.win/teal/users/{{ user.username }}.jpg">
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">{{ user.username }}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{ user.useremail }}</td>
+                <td class="mdl-data-table__cell--non-numeric">
+                    <a href="/dev/deleteUser/{{ user.id }}">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

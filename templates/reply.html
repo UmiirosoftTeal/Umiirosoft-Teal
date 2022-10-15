@@ -14,7 +14,7 @@
                 <div class="postData">
                     <p class="user-name">{{ post.postUser }}</p>
                 </div>
-                <p class="tweet-rp">{{ post.postTweet | replace('__newLine__', '<br>') | safe}}</p>
+                <p class="tweet-rp">{{ post.postTweet | replace('__newLine__', '<br>') | safe }}</p>
                 {% if post.imgUrl != None %}
                 <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{ post.imgUrl }}">
                 {% endif %}
