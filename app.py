@@ -8,7 +8,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 import boto3
 import datetime
-# from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 
 
 app = Flask(__name__)
@@ -408,16 +408,17 @@ def unauthorized():
     return redirect('/about')
 
 
-# # 定時実行
-# def job():
-#     db.session.query(Post).delete()
-#     db.session.commit()
+# 定時実行
+def job():
+    db.session.query(Post).delete()
+    db.session.commit()
 
-# sched = BackgroundScheduler(daemon=True)
-# sched.add_job(job, 'cron',  hour=0, minute=0) 
-# sched.start()
+def runs():
+    sched = BackgroundScheduler(daemon=True)
+    sched.add_job(job, 'cron',  hour=0, minute=0) 
+    sched.start()
 
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=443)
-
+    runs()
