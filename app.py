@@ -1,14 +1,14 @@
 # Umiirosoft Teal | coding by @gamma_410
 # Copyright 2022 Umiirosoft.
 
+
 from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import boto3
 import datetime
-from apscheduler.schedulers.background import BackgroundScheduler
-import time
+# from apscheduler.schedulers.background import BackgroundScheduler
 
 
 app = Flask(__name__)
@@ -408,16 +408,16 @@ def unauthorized():
     return redirect('/about')
 
 
-# 定時実行
-def job():
-    db.session.query(Post).delete()
-    db.session.commit()
+# # 定時実行
+# def job():
+#     db.session.query(Post).delete()
+#     db.session.commit()
 
-sched = BackgroundScheduler(daemon=True)
-sched.add_job(job, 'cron',  hour=0, minute=0) 
-sched.start()
+# sched = BackgroundScheduler(daemon=True)
+# sched.add_job(job, 'cron',  hour=0, minute=0) 
+# sched.start()
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=80)
+    app.run(debug=True, host='0.0.0.0', port=443)
 
