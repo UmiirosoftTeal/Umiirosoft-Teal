@@ -185,7 +185,7 @@ def editProfile(username):
 
 @app.route('/home/<string:username>/<string:tweethex>/<string:img>', methods=['GET', 'POST'])
 def reply(username, tweethex, img):
-    pwd = "投稿"
+    pwd = "くわしく"
     if request.method == 'POST':
         dt_now = datetime.datetime.now()
         postUser = current_user.username

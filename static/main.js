@@ -8,23 +8,13 @@ const Box = document.getElementById('Box');
 const mbBox = document.getElementById('mbBox');
 
 
-function onButton() {
-    const spinner = document.getElementById('loading');
-    spinner.classList.add('loader');
-    tweetPush.disabled = true;
-    Box.style.display = 'none';
-}
-function onButtonMB() {
-    const spinners = document.getElementById('loading');
-    spinners.classList.add('loader');
-    tweetPushMB.disabled = true;
-    mbBox.style.display = 'none';
-}
+
 tweetPush.style.display = "none";
 textCount.style.display = "none";
 
 tweetPushMB.style.display = "none";
 textCountMB.style.display = "none";
+
 
 function ShowLength(str) {
     textCount.innerHTML = str.length + "文字 / 120文字";

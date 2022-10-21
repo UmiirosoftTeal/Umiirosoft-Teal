@@ -11,10 +11,14 @@
     --tealOrange: #eebb56;
     --tealBoxShadow: #86868643 0px 2px 3px 2px;
 }
-
+@font-face {
+	font-family: 'MyFont';
+	src: url(Yomogi/Yomogi-Regular.ttf);
+}
+* {
+    font-family: MyFont;
+}
 body {
-    font-family: 'Inter', sans-serif;
-    font-family: 'Noto Sans JP', sans-serif;
     margin: 0px;
     padding: 0px;
 }
@@ -44,6 +48,7 @@ body {
 }
 
 .tweet-item {
+    font-family: MyFont;
     width: 50%;
     margin: 15px;
     padding: 15px;
@@ -64,6 +69,7 @@ body {
 
 #tweetPush,
 #tweetPush-mb {
+    font-family: MyFont;
     background: var(--tealColor2);
 }
 
@@ -104,16 +110,19 @@ body {
 
 .mdl-js-textfield,
 .mdl-textfield__input {
+    font-family: MyFont;
     font-size: 20px;
     width: 100%;
     resize: none;
 }
 
 .mdl-textfield.is-focused .mdl-textfield__label {
+    font-family: MyFont;
     color: var(--tealThemaColor);
 }
 
 .mdl-textfield__label:after {
+    font-family: MyFont;
     background-color: var(--tealThemaColor);
 }
 
@@ -128,15 +137,19 @@ body {
 }
 
 .user-name {
+    font-family: MyFont;
     font-weight: bold;
+    font-size: 18px;
 }
 
 td {
+    font-family: MyFont;
     padding-top: 10px;
     vertical-align: top;
 }
 
 .about-container {
+    font-family: MyFont;
     width: 100%;
     height: 100%;
     margin: 0px;
@@ -156,6 +169,7 @@ td {
 }
 
 .about-item {
+    font-family: MyFont;
     background: rgb(255, 255, 255);
     color: rgb(60, 60, 60);
     box-shadow: rgba(149, 149, 149, 0.311) 0px 3px 4px 2px;
@@ -179,6 +193,7 @@ td {
 }
 
 .about-item h2 {
+    font-family: MyFont;
     font-size: 35px;
     font-weight: bold;
     vertical-align: middle;
@@ -186,6 +201,7 @@ td {
 }
 
 .about-item p {
+    font-family: MyFont;
     font-size: 16px;
     font-weight: medium;
     letter-spacing: 0.8px;
@@ -193,6 +209,7 @@ td {
 }
 
 .about-item .mdl-button {
+    font-family: MyFont;
     width: 40%;
     margin: 10px;
     margin-top: 50px;
@@ -203,11 +220,13 @@ td {
 }
 
 .about-item .mdl-button:hover {
+    font-family: MyFont;
     background-color: var(--tealColor1);
 }
 
 .about-item a {
     color: var(--tealColor1);
+    font-family: MyFont;
     text-decoration: none;
 }
 
@@ -340,6 +359,7 @@ span {
 }
 
 .alert {
+    font-family: MyFont;
     width: 100%;
     text-align: center;
     padding: 10px;
@@ -360,6 +380,7 @@ span {
 }
 
 .profileBox {
+    font-family: MyFont;
     display: grid;
     grid-template-columns: 2fr minmax(180px, 1fr);
     gap: 15px;
@@ -369,6 +390,7 @@ span {
     padding-bottom: 30px;
 }
 .itemBox {
+    font-family: MyFont;
     box-shadow: 0px 1px 1px 1px rgba(181, 181, 181, 0.477);
     border-radius: 12px;
     padding: 10px;
@@ -383,6 +405,7 @@ span {
     margin-left: 20px;
 }
 .profileBox h2 {
+    font-family: MyFont;
     padding: 0px;
     margin: 0px;
     margin-top: 40px;
@@ -391,6 +414,7 @@ span {
     padding-left: 20px;
 }
 .profileBox h6 {
+    font-family: MyFont;
     font-size: 15px;
     padding: 0px;
     margin-top: 0px;
@@ -399,11 +423,13 @@ span {
     padding-right: 20px;
 }
 .profileBox p {
+    font-family: MyFont;
     padding-left: 20px;
     font-size: 14px;
     color:#a9a9a9;
 }
 .flex-prof {
+    font-family: MyFont;
     display: flex;
     justify-content: space-between;
     padding: 0px;
