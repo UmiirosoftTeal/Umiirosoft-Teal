@@ -36,7 +36,7 @@
                 <a class="mdl-navigation__link" href="/about">ようこそ</a>
                 {% else %}
                 <a class="mdl-navigation__link" href="/home">みつける</a>
-                <a class="mdl-navigation__link" href="/home/profile/{{ current_user.username }}">プロフィール</a>
+                <a class="mdl-navigation__link" href="/{{ current_user.username }}">プロフィール</a>
                 <a class="mdl-navigation__link" href="/logout">ログアウト</a>
                 {% endif %}
                 {% if current_user.username == "gamma" %}

@@ -59,11 +59,13 @@
             </tr>
         </thead>
         <tbody>
-            {% for user in users %}
+            {% for user, md5List in l %}
             <tr>
                 <td class="mdl-data-table__cell--non-numeric">
-                    <img width="60px" style="border-radius:50%;border: solid 1px #d3d3d3;"
-                        src="https://object.gamma410.win/teal/users/{{ user.username }}.jpg">
+                    <a href="/{{ user.username }}">
+                    <img width="60px" height="60px" style="border-radius:50%; border: solid 1px #d3d3d3;"
+                        src="https://1.gravatar.com/avatar/{{ md5List }}?s=4000">
+                    </a>
                 </td>
                 <td class="mdl-data-table__cell--non-numeric">{{ user.username }}</td>
                 <td class="mdl-data-table__cell--non-numeric">{{ user.useremail }}</td>

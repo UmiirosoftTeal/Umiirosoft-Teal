@@ -17,26 +17,10 @@
 
         <form method="POST" enctype="multipart/form-data">
             <br><br>
-            <p style="text-align:left;">アイコンの設定 (JPG)</p>
-            <label style="display:flex;justify-content:center;">
-                <input type="file" accept="image/jpeg" onchange="previewImage(this);" style="display:none;"
-                    name="userIcon">
-                <div class="box">
-                    <img id="preview" style="
-                            max-width: 100%; 
-                            width: 150px;
-                            height: 150px;
-                            object-fit: cover;
-                            border-radius: 50%;
-                            border: dashed rgb(238, 238, 238) 2px;
-                    ">
-                    <h1 class="centers">
-                        <span class="material-symbols-rounded">imagesmode</span>
-                    </h1>
-                </div>
-            </label>
-            <br>
-            <p style="text-align:left;">詳細</p>
+            <p style="text-align:left;">アイコン画像</p>
+            <p><a href="https://gravatar.com/" target="_blank" rel="noopener noreferrer">Gravatar</a> を使用して変更できます。</p>
+            <small>Tealと同じメールアドレスを使用してください !</small>
+            <p style="text-align:left;">Bio</p>
             <div class="mdl-textfield mdl-js-textfield">
                 <textarea name="postUserDetail" class="mdl-textfield__input" type="text" rows="3" id="sample1"></textarea>
                 <label class="mdl-textfield__label" for="sample1">あなたについて書いてください！</label>

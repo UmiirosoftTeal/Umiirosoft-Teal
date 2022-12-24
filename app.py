@@ -6,10 +6,9 @@ from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-import boto3
 import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
-
+import hashlib
 
 app = Flask(__name__)
 
@@ -35,7 +34,7 @@ class Post(db.Model):
     postUser = db.Column(db.String(20), nullable=False)
     postTweet = db.Column(db.String(120), nullable=True)
     postTweetHex = db.Column(db.Text)
-    imgUrl = db.Column(db.Text)
+    imgUrl = db.Column(db.Text) # 廃止
     replyUser = db.Column(db.Text)
     replyTweet = db.Column(db.Text)
     replyTweetHex = db.Column(db.Text)
@@ -60,18 +59,6 @@ class User(UserMixin, db.Model):
     useremail = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(25), nullable=False)
 
-
-# S3 の設定
-s3 = boto3.client('s3',
-                  endpoint_url='https://object.gamma410.win',
-                  aws_access_key_id='minioadmin',
-                  aws_secret_access_key='minioadmin'
-                  )
-
-# バケット名を代入しておく
-Bucket = 'teal'
-
-
 @app.route('/')
 def redirect_func():
     return redirect('/home')
@@ -83,108 +70,111 @@ def home():
     if request.method == 'GET':
         pwd = "みつける"
         tweets = Post.query.order_by(Post.id.desc()).all()
-        return render_template('index.html', tweets=tweets, pwd=pwd)
+
+        postUserLists = []
+        replyPostUserLists = []
+        for tweet in tweets:
+            postUser = tweet.postUser
+            user = User.query.filter_by(username=postUser).first()
+            userEmail = user.useremail
+            md5 = hashlib.md5(userEmail.encode("utf-8")).hexdigest()
+            postUserLists.append(md5)
+
+            replyPostUser = tweet.replyUser
+
+            if replyPostUser == None:    
+                nullMd5 = "null"
+                replyPostUserLists.append(nullMd5)
+            else:
+                repUser = User.query.filter_by(username=replyPostUser).first()
+                repUserEmail = repUser.useremail
+                repMd5 = hashlib.md5(repUserEmail.encode("utf-8")).hexdigest()
+                replyPostUserLists.append(repMd5)
+
+        return render_template('index.html', pwd=pwd, l=zip(tweets, postUserLists, replyPostUserLists))
 
     else:
         dt_now = datetime.datetime.now()
         postUser = current_user.username
         postTweet = request.form.get('postTweet')
-        picture = request.files['imgUrl']
         postTweet = postTweet.replace('?', '？')
         postTweet = postTweet.replace('#', '＃')
         postTweet = postTweet.replace('\n', '__newLine__')
         tweetHex = postTweet.encode('utf-8')
         postTweetHex = tweetHex.hex()
-        replyUser = None
-        replyTweet = None
-        replyTweetHex = None
-        replyImgUrl = None
         dateY = dt_now.strftime("%Y")
         dateM = dt_now.strftime("%m")
         dateD = dt_now.strftime("%d")
         timeH = dt_now.strftime("%H")
-        timeM = dt_now.strftime("%M")
+        timeM = dt_now.strftime("%M")        
 
-        if picture:
+        new_post = Post (
+            postUser = postUser, 
+            postTweet = postTweet, 
+            postTweetHex = postTweetHex, 
+            imgUrl = None,
+            replyUser = None, 
+            replyTweet = None, 
+            replyTweetHex = None, 
+            replyImgUrl = None,
+            dateY = dateY, 
+            dateM = dateM, 
+            dateD = dateD, 
+            timeH = timeH, 
+            timeM = timeM
+        )
 
-            postTweetCode = postTweet.encode('utf-8')
-            imgUrlHex = postTweetCode.hex()
-            imgUrl = imgUrlHex + ".jpg"  # ファイル名
-
-            iconMetaData = "image/jpeg"  # フォーマット指定
-
-            # S3 アップロード
-            s3.upload_fileobj(
-                picture, Bucket, f'picture/{imgUrl}', ExtraArgs={'ContentType': iconMetaData})
-
-            new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
-                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl,
-                            dateY=dateY, dateM=dateM, dateD=dateD, timeH=timeH, timeM=timeM)
-
-            db.session.add(new_post)
-            db.session.commit()
-
-        else:
-            imgUrl = None
-            new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
-                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl,
-                            dateY=dateY, dateM=dateM, dateD=dateD, timeH=timeH, timeM=timeM)
-
-            db.session.add(new_post)
-            db.session.commit()
+        db.session.add(new_post)
+        db.session.commit()
 
         return redirect('/home')
 
 
-@app.route('/home/profile/<string:username>', methods=['GET', 'POST'])
+@app.route('/<string:username>', methods=['GET', 'POST'])
 def profile(username):
-    post = Post.query.filter_by(
-        postUser=username).order_by(Post.id.desc()).all()
+    post = Post.query.filter_by(postUser=username).order_by(Post.id.desc()).all()
     count = Post.query.filter_by(postUser=username).count()
     user = User.query.filter_by(username=username).first()
+    email = user.useremail
+    md5 = hashlib.md5(email.encode("utf-8")).hexdigest()
 
     pwd = "プロフィール"
-    return render_template("profile.html", username=username, post=post, user=user, count=count, pwd=pwd)
+    return render_template("profile.html", username=username, post=post, user=user, count=count, pwd=pwd, md5=md5)
 
 
-@app.route('/home/profile/edit_profile/<string:username>', methods=['GET', 'POST'])
+@app.route('/edit_profile/<string:username>', methods=['GET', 'POST'])
 def editProfile(username):
     pwd = "プロフィール編集"
     if request.method == "POST":
-        try:
-            usericon = request.files['userIcon']
-            userdetail = request.form.get('postUserDetail')
-            iconUrl = username + ".jpg"
-            iconMetaData = "image/jpeg"  # フォーマット
+        if username == current_user.username:
+            try:
+                userdetail = request.form.get('postUserDetail')
 
-            if usericon:
-                s3.upload_fileobj(
-                    usericon, Bucket, f'users/{iconUrl}', ExtraArgs={'ContentType': iconMetaData})
-            else:
-                print("パス")
+                if userdetail:
+                    userData = User.query.filter_by(username=username).first()
+                    userData.userdetail = userdetail
+                    db.session.merge(userData)
+                    db.session.commit()
 
-            if userdetail:
-                userData = User.query.filter_by(username=username).first()
-                userData.userdetail = userdetail
-                db.session.merge(userData)
-                db.session.commit()
+                else:
+                    print("パス")
 
-            else:
-                print("パス")
+                flash("プロフィールを変更しました!")
+                return redirect(f'/{ username }')
 
-            flash("プロフィールを変更しました！（WEBブラウザのキャッシュにより、すぐにアイコンが変更されない場合があります。）")
-            return redirect(f'/home/profile/{ username }')
-
-        except:
-            flash("プロフィールの変更に失敗しました...")
-            return redirect(f'/home/profile/{ username }')
+            except:
+                flash("プロフィールの変更に失敗しました...")
+                return redirect(f'/{ username }')
+        else:
+            flash("ログインしているアカウントが異なります...")
+            return redirect(f'/{ username }')
 
     else:
         return render_template('editprof.html', pwd=pwd)
 
 
-@app.route('/home/<string:username>/<string:tweethex>/<string:img>', methods=['GET', 'POST'])
-def reply(username, tweethex, img):
+@app.route('/<string:username>/<string:tweethex>', methods=['GET', 'POST'])
+def reply(username, tweethex):
     pwd = "くわしく"
     if request.method == 'POST':
         dt_now = datetime.datetime.now()
@@ -209,51 +199,55 @@ def reply(username, tweethex, img):
         timeH = dt_now.strftime("%H")
         timeM = dt_now.strftime("%M")
 
-        if img == "None":
-            replyImgUrl = None
-        else:
-            replyImgUrl = img
-
-        picture = request.files['imgUrl']
-
         postTweet = postTweet.replace('?', '？')
 
-        if picture:
+        new_post = Post (
+            postUser = postUser, 
+            postTweet = postTweet, 
+            postTweetHex = postTweetHex, 
+            imgUrl = None,
+            replyUser = replyUser, 
+            replyTweet = replyTweet, 
+            replyTweetHex = replyTweetHex, 
+            replyImgUrl = None,
+            dateY = dateY, 
+            dateM = dateM, 
+            dateD = dateD, 
+            timeH = timeH, 
+            timeM = timeM
+        )
 
-            postTweetCode = postTweet.encode('utf-8')
-            imgUrlHex = postTweetCode.hex()
-            imgUrl = imgUrlHex + ".jpg"  # ファイル名
+        db.session.add(new_post)
+        db.session.commit()
 
-            iconMetaData = "image/jpeg"  # フォーマット指定
-
-            # S3 アップロード
-            s3.upload_fileobj(
-                picture, Bucket, f'picture/{imgUrl}', ExtraArgs={'ContentType': iconMetaData})
-
-            new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
-                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl,
-                            dateY=dateY, dateM=dateM, dateD=dateD, timeH=timeH, timeM=timeM)
-
-            db.session.add(new_post)
-            db.session.commit()
-
-        else:
-            imgUrl = None
-            new_post = Post(postUser=postUser, postTweet=postTweet, postTweetHex=postTweetHex, imgUrl=imgUrl,
-                            replyUser=replyUser, replyTweet=replyTweet, replyTweetHex=replyTweetHex, replyImgUrl=replyImgUrl,
-                            dateY=dateY, dateM=dateM, dateD=dateD, timeH=timeH, timeM=timeM)
-
-            db.session.add(new_post)
-            db.session.commit()
-
-        return redirect(f'/home/{ username }/{ tweethex }/{ img }')
+        return redirect(f'/{ username }/{ tweethex }')
 
     else:
-        post = Post.query.filter_by(
-            postUser=username, postTweetHex=tweethex).first()
-        reply = Post.query.filter_by(
-            replyUser=username, replyTweetHex=tweethex).order_by(Post.id.desc()).all()
-        return render_template('reply.html', post=post, reply=reply, pwd=pwd)
+        post = Post.query.filter_by(postUser=username, postTweetHex=tweethex).first()
+        postUser = User.query.filter_by(username=post.postUser).first()
+        postUserEmail = postUser.useremail 
+        md5 = hashlib.md5(postUserEmail.encode("utf-8")).hexdigest()
+        
+        if post.replyTweet:
+            replyTweetUser = post.replyUser
+            replyUser = User.query.filter_by(username=replyTweetUser).first()
+            replyTweetUserMd5 = hashlib.md5(replyUser.useremail.encode("utf-8")).hexdigest()
+        else:
+            replyTweetUserMd5 = None
+
+        replys = Post.query.filter_by(replyUser=username, replyTweetHex=tweethex).order_by(Post.id.desc()).all()
+
+        replyUserNames = []
+        for reply in replys:
+            replyUser = reply.postUser
+
+            if replyUser:
+                replyUserEmailSetup = User.query.filter_by(username=replyUser).first()
+                replyUserEmail = replyUserEmailSetup.useremail
+                replyUserMd5 = hashlib.md5(replyUserEmail.encode("utf-8")).hexdigest()
+                replyUserNames.append(replyUserMd5)
+
+        return render_template('reply.html', post=post, l=zip(replys, replyUserNames), pwd=pwd, md5=md5, replyTweetUserMd5=replyTweetUserMd5)
 
 
 # ログイン前系統
@@ -308,17 +302,10 @@ def signin():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        usericon = request.files['usericon']
         username = request.form.get('username')
         useremail = request.form.get('useremail')
         password = request.form.get('password')
         userdetail = "自己紹介を設定しよう！"
-
-        if usericon:
-            print("ok")
-        else:
-            flash("アイコン画像が設定されていません")
-            return redirect('/signup')
 
         if username:
             print("ok")
@@ -346,13 +333,6 @@ def signup():
             flash("同じ名前のユーザーが既に存在しています")
             return redirect('/signup')
 
-        iconUrl = username + ".jpg"  # ファイル名
-        iconMetaData = "image/jpeg"  # フォーマット指定
-
-        # S3 アップロード
-        s3.upload_fileobj(
-            usericon, Bucket, f'users/{iconUrl}', ExtraArgs={'ContentType': iconMetaData})
-
         new_user = User(username=username, useremail=useremail, userdetail=userdetail,
                         password=generate_password_hash(password, method='sha256'))  # パスワードをハッシュ値に変換
         db.session.add(new_user)
@@ -367,18 +347,38 @@ def signup():
 
 
 @app.route('/dev')
-@login_required 
+@login_required
 def dev():
     if current_user.username == "gamma":
         posts = Post.query.order_by(Post.id.desc()).all()
         users = User.query.order_by(User.id.desc()).all()
-        return render_template("dev.html", posts=posts, users=users)
+        md5Lists = []
+        for user in users:
+            email = user.useremail
+            md5 = hashlib.md5(email.encode("utf-8")).hexdigest()
+            md5Lists.append(md5)
+
+        return render_template("dev.html", posts=posts, l=zip(users, md5Lists))
+
     else:
         return "404"
 
+@app.route('/del/<string:u>/<int:n>')
+@login_required
+def tweetDelete(u, n):
+    if u == current_user.username:
+        post = Post.query.filter_by(id=n).first()
+        db.session.delete(post)
+        db.session.commit()
+        flash("つぶやきを削除しました !")
+        return redirect(f'/{ u }')
+    else:
+        flash("ログインしているアカウントが異なります...")
+        return redirect(f'/{ u }')
+
 
 @app.route('/dev/deleteTweet/<int:n>')
-@login_required 
+@login_required
 def devTweetDelete(n):
     post = Post.query.filter_by(id=n).first()
     db.session.delete(post)
@@ -387,7 +387,7 @@ def devTweetDelete(n):
 
 
 @app.route('/dev/deleteUser/<int:n>')
-@login_required 
+@login_required
 def devUserDelete(n):
     user = User.query.filter_by(id=n).first()
     db.session.delete(user)
@@ -413,9 +413,10 @@ def job():
     db.session.query(Post).delete()
     db.session.commit()
 
+
 def runs():
     sched = BackgroundScheduler(daemon=True)
-    sched.add_job(job, 'cron',  hour=0, minute=0) 
+    sched.add_job(job, 'cron',  hour=0, minute=0)
     sched.start()
 
 

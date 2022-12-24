@@ -17,7 +17,7 @@ textCountMB.style.display = "none";
 
 
 function ShowLength(str) {
-    textCount.innerHTML = str.length + "文字 / 120文字";
+    textCount.innerHTML = str.length + "文字 / 200文字";
     if (str.length <= 0) {
         tweetPush.style.display = "none";
         textCount.style.display = "none";
@@ -28,9 +28,9 @@ function ShowLength(str) {
         textCount.style.display = "block";
         tweetPush.disabled = false;
     }
-    if (str.length > 120) {
+    if (str.length > 200) {
         tweetPush.disabled = true;
-        const over = 120 - str.length;
+        const over = 200 - str.length;
         textCount.innerHTML = "文字数制限 " + over + "文字";
     }
 }
@@ -47,50 +47,11 @@ function ShowLengthMB(str) {
         textCountMB.style.display = "block";
         tweetPushMB.disabled = false;
     }
-    if (str.length > 120) {
+    if (str.length > 200) {
         tweetPushMB.disabled = true;
-        const over = 120 - str.length;
+        const over = 200 - str.length;
         textCountMB.innerHTML = "文字数制限 " + over;
     }
-}
-
-function imgPreView(event) {
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    var preview = document.getElementById("preview");
-    var previewImage = document.getElementById("previewImage");
-
-    if (previewImage != null)
-        preview.removeChild(previewImage);
-
-    reader.onload = function (event) {
-        var img = document.createElement("img");
-        img.setAttribute("src", reader.result);
-        img.setAttribute("id", "previewImage");
-        preview.appendChild(img);
-
-    };
-
-    reader.readAsDataURL(file);
-}
-
-function imgPreViewMB(event) {
-    var files = event.target.files[0];
-    var readers = new FileReader();
-    var previewMB = document.getElementById("preview-mb");
-    var previewImages = document.getElementById("previewImages");
-
-    if (previewImages != null)
-        previewMB.removeChild(previewImages);
-
-    readers.onload = function (event) {
-        var imgs = document.createElement("img");
-        imgs.setAttribute("src", readers.result);
-        imgs.setAttribute("id", "previewImages");
-        previewMB.appendChild(imgs);
-
-    };
-    readers.readAsDataURL(files);
 }
 
 

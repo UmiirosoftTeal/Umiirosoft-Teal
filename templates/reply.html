@@ -6,8 +6,8 @@
     <div class="tweet-item toolskit shadow">
         <table>
             <td>
-                <a href="/home/profile/{{ post.postUser }}">
-                    <img class="user-icon" src="https://object.gamma410.win/teal/users/{{ post.postUser }}.jpg">
+                <a href="/{{ post.postUser }}">
+                    <img class="user-icon" src="https://1.gravatar.com/avatar/{{ md5 }}?s=4000">
                 </a>
             </td>
             <td class="td">
@@ -15,9 +15,7 @@
                     <p class="user-name">{{ post.postUser }}</p>
                 </div>
                 <p class="tweet-rp">{{ post.postTweet | replace('__newLine__', '<br>') | safe }}</p>
-                {% if post.imgUrl != None %}
-                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{ post.imgUrl }}">
-                {% endif %}
+                
                 <div class="postData">
                     <p class="user-id">@{{ post.postUser }}.teal</p>
                     <p class="user-time">{{ post.timeH }}:{{ post.timeM }}・{{ post.dateY }}年{{ post.dateM }}月{{ post.dateD }}日</p>
@@ -26,13 +24,13 @@
         </table>
         {% if post.replyTweet != None %}
         <a
-            href="/home/{{ post.replyUser }}/{{ post.replyTweetHex }}/{{ post.replyUrl | replace(Null, 'None') }}">
+            href="/{{ post.replyUser }}/{{ post.replyTweetHex }}">
             <div class="replyTweet">
                 <table>
                     <td>
-                        <a href="/home/profile/{{ post.replyUser }}">
+                        <a href="/{{ post.replyUser }}">
                             <img class="user-icon"
-                                src="https://object.gamma410.win/teal/users/{{ post.replyUser }}.jpg">
+                                src="https://1.gravatar.com/avatar/{{ replyTweetUserMd5 }}?s=4000">
                         </a>
                     </td>
                     <td class="td">
@@ -40,10 +38,6 @@
                             <p class="user-name">{{ post.replyUser }}</p>
                         </div>
                         <p>{{ post.replyTweet | replace('__newLine__', '<br>') | safe}}</p>
-                        {% if post.replyImgUrl != None %}
-                        <img class="tweet-item-img"
-                            src="https://object.gamma410.win/teal/picture/{{ post.replyImgUrl }}">
-                        {% endif %}
                     </td>
                 </table>
             </div>
@@ -51,7 +45,7 @@
         {% endif %}
     </div>
     <div class="tweet-item tools shadow">
-        <form id="Box" action="/home/{{ post.postUser }}/{{ post.postTweetHex }}/{{ post.imgUrl }}"
+        <form id="Box" action="/{{ post.postUser }}/{{ post.postTweetHex }}"
             method="POST" enctype="multipart/form-data">
             <p id="textCount"></p>
             <div class="mdl-textfield mdl-js-textfield">
@@ -60,27 +54,20 @@
                 <label class="mdl-textfield__label" for="sample5">おへんじする</label>
             </div>
             <div class="btn-cover">
-                <label for="file_upload">
-                    <span class="material-symbols-rounded">imagesmode</span>
-                    <input type="file" id="file_upload" accept="image/jpeg" style="display:none;"
-                        onchange="imgPreView(event)" name="imgUrl">
-                </label>
-
                 <button onclick="onButton()" id="tweetPush" type="submit"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     おくる
                 </button>
             </div>
-            <div id="preview"></div>
         </form>
     </div>
 
-    {% for reply in reply %}
+    {% for reply, replyUserName in l %}
     <div class="tweet-item tweet-items shadow">
         <table>
             <td>
-                <a href="/home/profile/{{ reply.postUser }}">
-                    <img class="user-icon" src="https://object.gamma410.win/teal/users/{{reply.postUser}}.jpg">
+                <a href="/{{ reply.postUser }}">
+                    <img class="user-icon" src="https://1.gravatar.com/avatar/{{ replyUserName }}?s=4000">
                 </a>
             </td>
             <td class="td">
@@ -89,9 +76,6 @@
                     <p>{{ reply.timeH }}:{{ reply.timeM }}</p>
                 </div>
                 <p>{{ reply.postTweet | replace('__newLine__', '<br>') | safe}}</p>
-                {% if reply.imgUrl != None %}
-                <img class="tweet-item-img" src="https://object.gamma410.win/teal/picture/{{reply.imgUrl}}">
-                {% endif %}
             </td>
         </table>
     </div>

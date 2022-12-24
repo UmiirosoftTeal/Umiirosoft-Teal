@@ -17,7 +17,7 @@
         <div class="itemBox">
             <table>
                 <td>
-                    <img class="userIcons" src="https://object.gamma410.win/teal/users/{{ username }}.jpg">
+                    <img class="userIcons" src="https://1.gravatar.com/avatar/{{ md5 }}?s=4000">
                 </td>
                 <td>
                     <h2>{{ username }}</h2>
@@ -28,7 +28,7 @@
             {% if username == current_user.username %}
             <table>
                 <td>
-                    <a href="/home/profile/edit_profile/{{ current_user.username }}">
+                    <a href="/edit_profile/{{ current_user.username }}">
                         <span class="material-symbols-rounded">edit_square</span>
                     </a>
                 </td>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="itemBox boxas">
-            <p style="font-size:17px;letter-spacing:1.5px;">STATUS</p>
+            <p style="font-size:17px;letter-spacing:1.5px;">つぶやき</p>
             <br>
             <div class="flex-prof">
                 <p style="font-size:20px;letter-spacing:1.5px;font-weight:bold;">💬</p>
@@ -52,7 +52,7 @@
     <div class="tweet-item tweet-items shadow">
         <table>
             <td>
-                <img class="user-icon" src="https://object.gamma410.win/teal/users/{{post.postUser}}.jpg">
+                <img class="user-icon" src="https://1.gravatar.com/avatar/{{ md5 }}?s=4000">
             </td>
             <td class="td">
                 <p class="user-name">{{ post.postUser }}</p>
@@ -64,6 +64,9 @@
                     <p class="user-time">{{ post.timeH }}:{{ post.timeM }}・{{ post.dateY }}年{{ post.dateM }}月{{
                         post.dateD }}日</p>
                 </div>
+                {% if username == current_user.username %}
+                <small><a style="color:#ea8d8d;" href="/del/{{ post.postUser }}/{{ post.id }}">つぶやきを削除</a></small>
+            {% endif %}
             </td>
         </table>
     </div>
